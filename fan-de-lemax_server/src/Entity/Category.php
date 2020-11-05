@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+/**
+ * @ORM\Entity(repositoryClass=CategoryRepository::class)
+ */
+class Category
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     * @Groups({"article:read", "category:read"})
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     * @Groups({"article:read", "category:read"})
+     */
+    private $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="category")
+     * @Groups("category:read")
+     */
+    private $articles;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    } 
+
+    
+
+    /**
+     * @return Collection|articles[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+}
