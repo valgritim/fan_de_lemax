@@ -52,11 +52,10 @@ class Article
     private $imagePath;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer")
      * @Groups("article:read")
      */
-    private $category;
+    private $categoryId;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="article")
@@ -141,14 +140,14 @@ class Article
         return $this;
     }
 
-    public function getCategory(): ?category
+    public function getCategoryId(): ?category
     {
         return $this->category;
     }
 
-    public function setCategory(category $category): self
+    public function setCategoryId($categoryId): self
     {
-        $this->category = $category;
+        $this->categoryId = $categoryId;
 
         return $this;
     }

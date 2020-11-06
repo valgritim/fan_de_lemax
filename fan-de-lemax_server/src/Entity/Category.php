@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Article;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\Collection;
@@ -26,12 +27,12 @@ class Category
      */
     private $name;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="category")
-     * @Groups("category:read")
-     */
-    private $articles;
+    public function setId(int $id): self
+    {
+        $this->id = $id;
 
+        return $this;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -47,15 +48,8 @@ class Category
         $this->name = $name;
 
         return $this;
-    } 
+    }     
 
     
 
-    /**
-     * @return Collection|articles[]
-     */
-    public function getArticles(): Collection
-    {
-        return $this->articles;
-    }
 }

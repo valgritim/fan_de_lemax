@@ -68,32 +68,33 @@ class CrawlingService {
      *
      */
     public function getAllDatasFromLemaxCollection($category, $numberOfPages){
-        
-        $itemsArray = [];
-        $client = new Client();
+
+        $client = new Client();        
 
         for($i = 1; $i <= $numberOfPages; $i++){
-
-            $generalCrawler = $client->request('GET','https://www.lemaxcollection.com/villages/caddington/'. $category . '/page/' . $i);
-        
-            $nodeValues = $generalCrawler->filter('li.sfproductListItem')->each(function (Crawler $node) use ($client, $category, $itemsArray){
-                $img = $node->filter('img.productImage')->attr('src');
-                $sku =$node->filter('h2.sfproductTitle > a')->text();
+            
+            $generalCrawler = $client->request('GET','https://www.lemaxcollection.com/categories/'. $category ."/page/" . $numberOfPages);
+            
+            $nodeValues = $generalCrawler->filter('li.sfproductListItem')->each(function (Crawler $node) use ($client, $category)
+            {
+                $img = $node->filter('img.productImage')->attr('src');                
+                $sku =$node->filter('h2.sfproductTitle > a')->text();                
                 $name = $node->filter('img.productImage')->attr('title');
                 $link = $node->filter('h2.sfproductTitle > a')->attr('href');
                 $linkLength = strlen($link); 
                 $correctedLink = substr($link,3, $linkLength+1);
             //Search by item to find release date
                 $itemCrawler = $client->request('GET','https://www.lemaxcollection.com/categories/'. $category . '/' . $correctedLink);                
-                $spanSearch = $itemCrawler->filter('span#ctl00_productlistWidget_C002_productsFrontendDetail_ctl00_ctl00_SingleItemContainer_ctrl0_customFieldsControl_lblYearReleased')->text();
+                $releaseSearch = $itemCrawler->filter('span#ctl00_productlistWidget_C002_productsFrontendDetail_ctl00_ctl00_SingleItemContainer_ctrl0_customFieldsControl_lblYearReleased')->text();
                 
-            //RESTE A FAIRE:
-            // 1.Créer un tableau avec les datas d'un objet
-            //2. Pusher chaque tableau dans le tableau $itemsArray
-            //3. Retourner le tableau
-            }); 
+                $data = array(); 
+                $data[] = [$name, $sku, $releaseSearch, $img, $category];  
 
+               return $data;
+                       
+            }); 
+           
         }
-    
+        return $nodeValues;
     }
 }
