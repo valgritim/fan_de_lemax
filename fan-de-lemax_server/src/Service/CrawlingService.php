@@ -73,7 +73,44 @@ class CrawlingService {
 
         for($i = 1; $i <= $numberOfPages; $i++){
             
-            $generalCrawler = $client->request('GET','https://www.lemaxcollection.com/categories/'. $category ."/page/" . $numberOfPages);
+            $generalCrawler = $client->request('GET','https://www.lemaxcollection.com/villages/caddington/'. $category);
+            
+            $nodeValues = $generalCrawler->filter('li.sfproductListItem')->each(function (Crawler $node) use ($client, $category)
+            {
+                $img = $node->filter('img.productImage')->attr('src');                
+                $sku =$node->filter('h2.sfproductTitle > a')->text();                
+                $name = $node->filter('img.productImage')->attr('title');
+                $link = $node->filter('h2.sfproductTitle > a')->attr('href');
+            //    dd($link);
+                $linkLength = strlen($link); 
+                $correctedLink = substr($link,13, $linkLength+1);
+                // dd($correctedLink);
+            //Search by item to find release date
+                $itemCrawler = $client->request('GET','https://www.lemaxcollection.com/categories/'. $category . '/' . $correctedLink);                     
+                $releaseSearch = $itemCrawler->filter('span#ctl00_productlistWidget_C002_productsFrontendDetail_ctl00_ctl00_SingleItemContainer_ctrl0_customFieldsControl_lblYearReleased')->text();
+                
+                $data = array(); 
+                $data[] = [$name, $sku, $releaseSearch, $img, $category];  
+
+               return $data;
+                       
+            }); 
+           
+        }
+        return $nodeValues;
+    }
+
+    /**
+     * Get all the retired lemax collection from Lemax main Website - use once to fill DB
+     *
+     */
+    public function getAllRetiredDatasFromLemaxCollection($category, $numberOfPages){
+
+        $client = new Client();        
+
+        for($i = 1; $i <= $numberOfPages; $i++){
+            
+            $generalCrawler = $client->request('GET','https://www.lemaxcollection.com/retired/holidays-seasons/'. $category ."/page/" . $numberOfPages);
             
             $nodeValues = $generalCrawler->filter('li.sfproductListItem')->each(function (Crawler $node) use ($client, $category)
             {
@@ -84,11 +121,17 @@ class CrawlingService {
                 $linkLength = strlen($link); 
                 $correctedLink = substr($link,3, $linkLength+1);
             //Search by item to find release date
-                $itemCrawler = $client->request('GET','https://www.lemaxcollection.com/categories/'. $category . '/' . $correctedLink);                
-                $releaseSearch = $itemCrawler->filter('span#ctl00_productlistWidget_C002_productsFrontendDetail_ctl00_ctl00_SingleItemContainer_ctrl0_customFieldsControl_lblYearReleased')->text();
+                $itemCrawler = $client->request('GET','https://www.lemaxcollection.com/retired/holidays-seasons/'. $category . '/' . $correctedLink);                
+                $releaseSearch = $itemCrawler->filter('div.productSku')->nextAll()->eq(0)->text();                
+                $retiredSearch = $itemCrawler->filter('div.productSku')->nextAll()->eq(1)->text();
+                $lengthRelease = strlen($releaseSearch);
+                $correctedRelease= substr($releaseSearch, 15, $lengthRelease+1);
+                $lengthRetired = strlen($retiredSearch);
+                $correctedRetired = substr($retiredSearch, 14, $lengthRetired+1);
                 
                 $data = array(); 
-                $data[] = [$name, $sku, $releaseSearch, $img, $category];  
+                $data[] = [$name, $sku, $correctedRelease, $correctedRetired, $img, $category]; 
+             //   dd($data); 
 
                return $data;
                        

@@ -52,6 +52,14 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function findRetiredArticles()
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.retired IS NOT NULL' )
+            ->getQuery()
+            ->getResult();
+    }
     
     
 }

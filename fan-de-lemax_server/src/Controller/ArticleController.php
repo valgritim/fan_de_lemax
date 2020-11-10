@@ -27,6 +27,21 @@ class ArticleController extends AbstractController
         
     }
 
+        /**
+     * Retourne tous les articles de la base de données
+     * @Route("/api/articles/retired", name="api_retired_articles", methods={"GET"})
+     */
+    public function getRetiredArticles(ArticleRepository $repository, NormalizerInterface $normalizerInterface, SerializerInterface $serializerInterface)
+    {
+        $articles = $repository->findRetiredArticles();      
+
+        // $json = $serializerInterface->serialize($articles,'json'articles, ['groups' => 'article:read']);
+         
+        // return new JsonResponse($json, 200,[], true);
+        return $this->json($articles, 200 , [], ['groups' => 'article:read']);       
+        
+    }
+
     /**
      * Retourne un article selon l'id entré
      * @Route("/api/articles/{id}", name="api_articles_article", methods={"GET"})

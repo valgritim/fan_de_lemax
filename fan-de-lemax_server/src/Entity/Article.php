@@ -140,9 +140,9 @@ class Article
         return $this;
     }
 
-    public function getCategoryId(): ?category
+    public function getCategoryId(): ?int
     {
-        return $this->category;
+        return $this->categoryId;
     }
 
     public function setCategoryId($categoryId): self
