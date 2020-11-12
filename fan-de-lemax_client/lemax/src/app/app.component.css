@@ -1,0 +1,31 @@
+.img-wrapper>img{
+  height: 80vh;
+  width: 150vh;
+}
+.jumbotron{
+  background-color: rgb(128, 56, 56);
+}
+
+#categories{
+  display: flex;
+  justify-content: space-around;
+}
+.custom-img{
+    list-style-type: none;
+    float: left;
+}
+.custom-img > a > img{
+  border: 3px solid lightgray;
+  border-radius: 50%;
+  height: 12em;
+  width: 12em;
+}
+#horizontal-li{
+  width: 100%;
+  margin:auto;
+}
+#horizontal-li> li{
+  float:left !important;
+  list-style-type: none;
+
+}

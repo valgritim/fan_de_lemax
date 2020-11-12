@@ -15,65 +15,90 @@ class ArticleController extends AbstractController
     /**
      * Retourne tous les articles de la base de données
      * @Route("/api/articles", name="api_articles", methods={"GET"})
+     * @param ArticleRepository $repository
+     * @param SerializerInterface $serializerInterface
+     * @return JsonResponse
      */
-    public function index(ArticleRepository $repository, NormalizerInterface $normalizerInterface, SerializerInterface $serializerInterface)
+    public function index(ArticleRepository $repository, SerializerInterface $serializerInterface)
     {
         $articles = $repository->findAll();      
 
-        // $json = $serializerInterface->serialize($articles,'json', ['groups' => 'article:read']);
+        $json = $serializerInterface->serialize($articles,'json', ['groups' => 'article:read']);
          
-        // return new JsonResponse($json, 200,[], true);
-        return $this->json($articles, 200 , [], ['groups' => 'article:read']);       
+        return new JsonResponse($json, 200,[], true);
+        // return $this->json($articles, 200 , [], ['groups' => 'article:read']);       
         
     }
 
         /**
      * Retourne tous les articles de la base de données
      * @Route("/api/articles/retired", name="api_retired_articles", methods={"GET"})
+     * @param ArticleRepository $repository
+     * @param SerializerInterface $serializerInterface
+     * @return JsonResponse
      */
-    public function getRetiredArticles(ArticleRepository $repository, NormalizerInterface $normalizerInterface, SerializerInterface $serializerInterface)
+    public function getRetiredArticles(ArticleRepository $repository, SerializerInterface $serializerInterface)
     {
         $articles = $repository->findRetiredArticles();      
 
-        // $json = $serializerInterface->serialize($articles,'json'articles, ['groups' => 'article:read']);
+        $json = $serializerInterface->serialize($articles,'json', ['groups' => 'article:read']);
          
-        // return new JsonResponse($json, 200,[], true);
-        return $this->json($articles, 200 , [], ['groups' => 'article:read']);       
+        return new JsonResponse($json, 200,[], true);
+        //return $this->json($articles, 200 , [], ['groups' => 'article:read']);       
         
     }
 
     /**
      * Retourne un article selon l'id entré
      * @Route("/api/articles/{id}", name="api_articles_article", methods={"GET"})
+     * @var $id
+     * @param ArticleRepository $repository
+     * @param SerializerInterface $serializerInterface
+     * @return JsonResponse
      */
-    public function getArticleById(ArticleRepository $repository, $id){
+    public function getArticleById(ArticleRepository $repository,SerializerInterface $serializerInterface, $id){
 
         $article = $repository->findOneById($id);
-
-        return $this->json($article, 200,[], ['groups' => 'article:read']);
+        $json = $serializerInterface->serialize($article,'json', ['groups' => 'article:read']);
+         
+        return new JsonResponse($json, 200,[], true);
+        //return $this->json($article, 200,[], ['groups' => 'article:read']);
 
     }
     /**
      * Retourne un article selon l'id entré
      * @Route("/api/articles/name/{name}", name="api_articles_articleName", methods={"GET"})
+     * @var $name
+     * @param ArticleRepository $repository
+     * @param SerializerInterface $serializerInterface
+     * @return JsonResponse
      */
-    public function getArticleByName($name, ArticleRepository $repository){
+    public function getArticleByName($name, ArticleRepository $repository, SerializerInterface $serializerInterface){
 
         $article = $repository->findByName($name);
+        $json = $serializerInterface->serialize($article,'json', ['groups' => 'article:read']);
+         
+        return new JsonResponse($json, 200,[], true);
 
-        return $this->json($article, 200,[], ['groups' => 'article:read']);
+        // return $this->json($article, 200,[], ['groups' => 'article:read']);
 
     }
 
         /**
-     * Retourne un article selon l'id entré
+     * Retourne un article selon le sku (identifiant Lemax) entré
      * @Route("/api/articles/sku/{sku}", name="api_articles_articleSku", methods={"GET"})
+     * @var $sku
+     * @param ArticleRepository $repository
+     * @param SerializerInterface $serializerInterface
+     * @return JsonResponse
      */
-    public function getArticleBySku($sku, ArticleRepository $repository){
+    public function getArticleBySku($sku, ArticleRepository $repository, SerializerInterface $serializerInterface){
 
         $article = $repository->findBySku($sku);
-
-        return $this->json($article, 200,[], ['groups' => 'article:read']);
+        $json = $serializerInterface->serialize($article,'json', ['groups' => 'article:read']);
+         
+        return new JsonResponse($json, 200,[], true);
+        // return $this->json($article, 200,[], ['groups' => 'article:read']);
 
     }
 }

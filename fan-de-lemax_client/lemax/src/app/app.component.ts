@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'lemax';
+  images = [1000, 1011, 984].map((n) => `https://picsum.photos/id/${n}/1900/500`);
 }
