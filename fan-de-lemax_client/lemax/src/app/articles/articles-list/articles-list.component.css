@@ -1,0 +1,4 @@
+#displayAll {
+  display: flex;
+  justify-content: space-evenly;
+}

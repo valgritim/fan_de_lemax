@@ -1,6 +1,6 @@
 <app-header></app-header>
-<div class="jumbotron mt-1">
-  <ngb-carousel *ngIf="images" class="text-center">
+<div class="bg-red">
+  <ngb-carousel class="text-center">
     <ng-template ngbSlide>
       <div class="img-wrapper">
         <img src="assets/images/jumbo2.png" alt="first slide">
@@ -25,22 +25,13 @@
       </div>
       <div class="carousel-caption">
         <h3>Collection Lemax</h3>
-        <p>Créez des magnifiques villages de Noël</p>
+        <p>Créez de magnifiques villages de Noël</p>
       </div>
     </ng-template>
   </ngb-carousel>
 </div>
 <div class="container-fluid">
-  <h1 class=" text-center mb-5">Catégories Lemax</h1>
-  <div class="col-md-12">
-    <ul id="categories">
-      <li class="custom-img text-center"><a href="#"><img src="assets/images/grand_opera.jpg" alt="Grand Opera House"></a><h3>Maisons</h3></li>
-      <li class="custom-img text-center"><a href="#"><img src="assets/images/beersmith_facade.jpg" alt="Beersmith facade"></a><h3>Façades</h3></li>
-      <li class="custom-img text-center"><a href="#"><img src="assets/images/cafe_society.jpg" alt="Cafe Society"></a><h3>Personnages</h3></li>
-      <li class="custom-img text-center"><a href="#"><img src="assets/images/fountain.jpg" alt="Lighted Fountain"></a><h3>Accessoires</h3></li>
-      <li class="custom-img text-center"><a href="#"><img src="assets/images/ballroom.jpg" alt="Animated Ballroom"></a><h3>Animations</h3></li>
-    </ul>
-  </div>
+  <router-outlet></router-outlet>
 </div>
 
-<router-outlet></router-outlet>
+

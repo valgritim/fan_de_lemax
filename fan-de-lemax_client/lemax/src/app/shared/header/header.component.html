@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#"><img id="logo_fan" src="#" alt="">Fan de Lemax</a>
+  <a class="navbar-brand" href="#"><img id="logo_fan" src="assets/images/logo_lemax.png" alt=""></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -14,17 +14,17 @@
           Catégories
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#"><img src="assets/images/grand_opera.jpg" alt=""> Maisons</a>
-          <a class="dropdown-item" href="#"><img src="assets/images/beersmith_facade.jpg" alt=""> Façades</a>
-          <a class="dropdown-item" href="#"><img src="assets/images/cafe_society.jpg" alt=""> Personnages</a>
-          <a class="dropdown-item" href="#"><img src="assets/images/fountain.jpg" alt="">  Accessoires</a>
-          <a class="dropdown-item" href="#"><img src="assets/images/ballroom.jpg" alt="">  Animations</a>
+          <a class="dropdown-item" routerLink="/articles/lighted-buildings"><img src="assets/images/grand_opera.jpg" alt=""> Maisons</a>
+          <a class="dropdown-item"routerLink="/articles/facades"><img src="assets/images/beersmith_facade.jpg" alt=""> Façades</a>
+          <a class="dropdown-item" routerLink="/articles/figurines"><img src="assets/images/cafe_society.jpg" alt=""> Personnages</a>
+          <a class="dropdown-item" routerLink="/articles/accessories"><img src="assets/images/fountain.jpg" alt="">  Accessoires</a>
+          <a class="dropdown-item" routerLink="/articles/animations"><img src="assets/images/ballroom.jpg" alt="">  Animations</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#"><img src="assets/images/retired.png" alt="">  Articles retirés</a>
+          <a class="dropdown-item" routerLink="/articles/retired"><img src="assets/images/retired.png" alt="">  Articles retirés</a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Articles retirés</a>
+        <a class="nav-link" routerLink="/articles/retired">Articles retirés</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">S'identifier/Créer un compte</a>
@@ -32,7 +32,7 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Rechercher un article" aria-label="Search">
-      <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Rechercher</button>
+      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Rechercher</button>
     </form>
   </div>
 </nav>

@@ -1,1 +1,9 @@
-<p>article works!</p>
+<a routerLink="/articles/{{category}}/{{ myArticle.sku }}"  class="list-group-item clearfix" (click)="onSelected()">
+  <div class="pull-left">
+    <img [src]="myArticle.imagePath" alt="{{ myArticle.name }}" class="img-responsive" style="max-height: 200px;">
+    <hr>
+    <h4 class="list-group-item-heading">{{ myArticle.name }}</h4>
+    <h5 class="text-center">SKU# {{ myArticle.sku }}</h5>
+    <p class="list-group-item-text text-center">Date de sortie : {{ myArticle.release}}</p>
+  </div>
+</a>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'lemax';
-  images = [1000, 1011, 984].map((n) => `https://picsum.photos/id/${n}/1900/500`);
+  showNavigationArrows = false;
+
+  constructor(config: NgbCarouselConfig){
+    config.showNavigationArrows = false;
+  }
 }
