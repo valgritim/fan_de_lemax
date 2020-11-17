@@ -13,13 +13,8 @@ export class ArticleDetailComponent implements OnInit {
   constructor(private articleService: ArticleService) { }
 
   ngOnInit(): void {
-    this.articleService.articleSelected
-      .subscribe(
-        (article: Article) => {
-          this.selectedArticle = article;
-          console.log(this.selectedArticle);
-        }
-      );
+    this.selectedArticle = this.articleService.articleSelected;
+
   }
 
 }

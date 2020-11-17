@@ -1,0 +1,10 @@
+<ul id="categories">
+  <li *ngFor="let categoryEl of categories, let i = index" class="custom-img">
+    <a [routerLink]="[i+1]">
+      <img src="{{ categoryEl.img }}" alt="{{ categoryEl.alt }}">
+  </a>
+  <h3 class="text-center">{{categoryEl.name}}</h3>
+  </li>
+</ul>
+
+

@@ -1,14 +1,23 @@
-<div class="col-md-12">
-  <h1>{{ selectedArticle.name }}</h1>
-  <div class="row flex">
-    <div class="col-md-6">
-      <img [src]="selectedArticle.imagePath" alt="{{ selectedArticle.name}}">
+<div class="container">
+  <div class="col-md-12">
+    <h1>{{ selectedArticle.name }}</h1>
+    <div class="row flex mb-5">
+      <div class="col-md-6">
+        <img [src]="selectedArticle.imagePath" alt="{{ selectedArticle.name}}">
+      </div>
+      <div class="offset-1 col-md-5">
+        <h2>Détails de l'article</h2>
+        <h3>SKU#: {{ selectedArticle.sku }}</h3>
+        <p>Date de sortie: {{ selectedArticle.release}}</p>
+        <p *ngIf="selectedArticle.retired == null">Cet Article est toujours en vente</p>
+        <p *ngIf="selectedArticle.retired != null">Article retiré en {{ selectedArticle.retired }}</p>
+      </div>
     </div>
-    <div class="offset-1 col-md-5">
-      <h2>Détails de l'article</h2>
-      <h3>SKU#: {{ selectedArticle.sku }}</h3>
-      <p>Date de sortie: {{ selectedArticle.release}}</p>
-      <p *ngIf="selectedArticle.retired != null">Article retiré en {{ selectedArticle.retired }}</p>
+    <div id="shops">
+      <h3>Vous pouvez trouver {{selectedArticle.name}} chez : </h3>
+      <ul>
+        <li>blablabla </li>
+      </ul>
     </div>
   </div>
 </div>

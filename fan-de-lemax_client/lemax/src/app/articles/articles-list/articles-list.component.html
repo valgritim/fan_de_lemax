@@ -1,14 +1,18 @@
-<div id="list-title" class="mb-5" [ngSwitch]="category">
-  <h1 class="text-center" *ngSwitchCase="'lighted-buildings'">Catégorie: Maisons</h1>
-  <h1 class="text-center" *ngSwitchCase="'facades'">Catégorie: Façades</h1>
-  <h1 class="text-center" *ngSwitchCase="'figurines'">Catégorie: Personnages</h1>
-  <h1 class="text-center" *ngSwitchCase="'accessories'">Catégorie: Accessoires</h1>
-  <h1 class="text-center" *ngSwitchDefault>Catégorie: Animations</h1>
+<div id="list-title" class="mb-5 mt-3" [ngSwitch]=id>
+  <h1 class="text-center" *ngSwitchCase="1">Maisons</h1>
+  <h1 class="text-center" *ngSwitchCase="2">Façades</h1>
+  <h1 class="text-center" *ngSwitchCase="3">Personnages</h1>
+  <h1 class="text-center" *ngSwitchCase="4">Accessoires</h1>
+  <h1 class="text-center" *ngSwitchDefault>Animations</h1>
 </div>
 <div class="col-md-12" id="displayAll">
   <app-article
     *ngFor="let articleEl of articles"
-    [myArticle] = "articleEl">
+    [myArticle] = "articleEl"
+  >
   </app-article>
 </div>
+<!--<div *ngIf="selectedArticle">
+  <app-article-detail [selectedArticle]="selectedArticle" ></app-article-detail>
+</div>-->
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -8,9 +9,12 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 })
 export class HeaderComponent implements OnInit {
   faHome = faHome;
-  constructor() { }
+  id :number;
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
   }
+
 
 }

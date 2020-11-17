@@ -10,24 +10,24 @@
         <a class="nav-link" href="#"><fa-icon [icon]="faHome"></fa-icon><span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" routerLinkActive="active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Catégories
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" routerLink="/articles/lighted-buildings"><img src="assets/images/grand_opera.jpg" alt=""> Maisons</a>
-          <a class="dropdown-item"routerLink="/articles/facades"><img src="assets/images/beersmith_facade.jpg" alt=""> Façades</a>
-          <a class="dropdown-item" routerLink="/articles/figurines"><img src="assets/images/cafe_society.jpg" alt=""> Personnages</a>
-          <a class="dropdown-item" routerLink="/articles/accessories"><img src="assets/images/fountain.jpg" alt="">  Accessoires</a>
-          <a class="dropdown-item" routerLink="/articles/animations"><img src="assets/images/ballroom.jpg" alt="">  Animations</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+          <a class="dropdown-item" [routerLink]= "['category', 1]"><img src="assets/images/grand_opera.jpg" alt="Maisons"> Maisons</a>
+          <a class="dropdown-item" [routerLink]= "['category',2]"><img src="assets/images/beersmith_facade.jpg" alt="facades"> Façades</a>
+          <a class="dropdown-item" [routerLink]= "['category',3]"><img src="assets/images/cafe_society.jpg" alt="Personnages"> Personnages</a>
+          <a class="dropdown-item" [routerLink]= "['category',4]"><img src="assets/images/fountain.jpg" alt="Accessoires">  Accessoires</a>
+          <a class="dropdown-item" [routerLink]= "['category',5]"><img src="assets/images/ballroom.jpg" alt="Animations">  Animations</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" routerLink="/articles/retired"><img src="assets/images/retired.png" alt="">  Articles retirés</a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/articles/retired">Articles retirés</a>
+        <a class="nav-link" routerLink="/articles/retired" routerLink="active">Articles retirés</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">S'identifier/Créer un compte</a>
+        <a class="nav-link" routerLinkactive="active" href="#">S'identifier/Créer un compte</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

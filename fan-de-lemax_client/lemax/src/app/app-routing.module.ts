@@ -1,21 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
-import { ArticleDetailComponent } from './articles/article/article-detail/article-detail.component';
-import { ArticlesListComponent } from './articles/articles-list/articles-list.component';
 import { HomeComponent } from './home/home.component';
-
+import { CategoriesComponent } from './categories/categories.component';
+import { ArticlesListComponent } from './articles/articles-list/articles-list.component';
+import { ArticleDetailComponent } from './articles/article/article-detail/article-detail.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch:'full'},
-  { path: 'home', component: HomeComponent},
-  { path: 'articles/:category', component: ArticlesListComponent,
+  { path: '', redirectTo: 'category', pathMatch:'full'},
+  { path: 'category', component: HomeComponent,
       children: [
-        { path: ':articleName', component: ArticleDetailComponent}
+        { path: '', component: CategoriesComponent},
+        { path: ':id', component: ArticlesListComponent},
+        { path: ':id/:sku', component: ArticleDetailComponent}
       ]
   },
-  { path: 'articles', component: ArticlesListComponent},
-
 ];
 
 @NgModule({

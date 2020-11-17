@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { ArticleService } from './shared/article.service';
 import { ArticleDetailComponent } from './articles/article/article-detail/article-detail.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ArticleDetailComponent } from './articles/article/article-detail/articl
     ArticleComponent,
     HeaderComponent,
     HomeComponent,
-    ArticleDetailComponent
+    ArticleDetailComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
