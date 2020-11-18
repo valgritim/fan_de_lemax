@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-root',
@@ -11,5 +12,9 @@ export class AppComponent {
 
   constructor(config: NgbCarouselConfig){
     config.showNavigationArrows = false;
+  }
+
+  ngOnInit(){
+
   }
 }

@@ -21,18 +21,14 @@ export class ArticlesListComponent implements OnInit {
   constructor(private route: ActivatedRoute, private articleService : ArticleService) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
-    console.log("dans la liste " + this.id);
 
-    this.articles = this.articleService.getArticlesByCategory(this.id);
-    // this.articleService.articleSelected
-    //   .subscribe(
-    //     (article: Article) => {
-    //       this.selectedArticle = article;
-    //       this.isArticleSelected = true;
-    //       // console.log(this.selectedArticle);
-    //     }
-    //   );
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.id = +params['id'];
+        this.articles = this.articleService.getArticlesByCategory(this.id);
+      }
+    );
+    console.log("dans la liste " + this.id);
 
   }
 

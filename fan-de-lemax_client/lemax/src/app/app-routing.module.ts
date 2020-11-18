@@ -4,8 +4,10 @@ import { HomeComponent } from './home/home.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ArticlesListComponent } from './articles/articles-list/articles-list.component';
 import { ArticleDetailComponent } from './articles/article/article-detail/article-detail.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
+
   { path: '', redirectTo: 'category', pathMatch:'full'},
   { path: 'category', component: HomeComponent,
       children: [
@@ -14,6 +16,9 @@ const routes: Routes = [
         { path: ':id/:sku', component: ArticleDetailComponent}
       ]
   },
+  { path: 'not-found', component: NotFoundComponent},
+  { path:'**', redirectTo:'not-found'}
+
 ];
 
 @NgModule({

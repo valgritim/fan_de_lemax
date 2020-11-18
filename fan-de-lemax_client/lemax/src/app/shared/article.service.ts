@@ -25,6 +25,7 @@ export class ArticleService {
   }
 
   getArticlesByCategory(id: number){
+    this.articlesByCategory = [];
     this.articles.forEach(article => {
       if(article.category == id){
         console.log("article category " + article.category);

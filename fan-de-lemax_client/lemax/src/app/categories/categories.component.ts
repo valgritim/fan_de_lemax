@@ -13,20 +13,11 @@ export class CategoriesComponent implements OnInit {
   id : number;
   category: string;
 
-  constructor(private categoryService : CategoryService, private route: ActivatedRoute) {
-
-   }
+  constructor(private categoryService : CategoryService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-
     this.categories = this.categoryService.getCategories();
-    console.log(this.categories);
 
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.id = +params['id'];
-      }
-    );
   }
 
 }

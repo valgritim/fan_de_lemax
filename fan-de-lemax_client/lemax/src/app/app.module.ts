@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { ArticleService } from './shared/article.service';
 import { ArticleDetailComponent } from './articles/article/article-detail/article-detail.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { CategoriesComponent } from './categories/categories.component';
     HeaderComponent,
     HomeComponent,
     ArticleDetailComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
