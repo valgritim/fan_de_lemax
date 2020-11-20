@@ -50,7 +50,7 @@ class ArticleController extends AbstractController
 
     /**
      * Retourne un article selon l'id entré
-     * @Route("/api/articles/{id}", name="api_articles_article", methods={"GET"})
+     * @Route("/api/articles/article/{id}", name="api_articles_article", methods={"GET"})
      * @var $id
      * @param ArticleRepository $repository
      * @param SerializerInterface $serializerInterface
@@ -87,7 +87,7 @@ class ArticleController extends AbstractController
         /**
      * Retourne un article selon le sku (identifiant Lemax) entré
      * @Route("/api/articles/sku/{sku}", name="api_articles_articleSku", methods={"GET"})
-     * @var $sku
+     * @param $sku
      * @param ArticleRepository $repository
      * @param SerializerInterface $serializerInterface
      * @return JsonResponse
@@ -100,6 +100,22 @@ class ArticleController extends AbstractController
         return new JsonResponse($json, 200,[], true);
         // return $this->json($article, 200,[], ['groups' => 'article:read']);
 
+    }
+
+    /**
+     * @Route("/api/articles/{categoryId}", name="api_articles_articleCategory", methods={"GET"})
+     *
+     * @param $categoryId
+     * @param ArticleRepository $repository
+     * @param SerializerInterface $serializerInterface
+     * @return JsonResponse
+     */
+    public function getArticlesByCategory($categoryId, ArticleRepository $repository, SerializerInterface $serializerInterface){
+
+        $articles = $repository->findArticlesByCategoryId($categoryId);
+        $json = $serializerInterface->serialize($articles, 'json', ['groups' => 'article:read']);
+
+        return new JsonResponse($json, 200, [], true);
     }
 }
 

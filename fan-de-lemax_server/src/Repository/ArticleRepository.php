@@ -60,6 +60,14 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findArticlesByCategoryId($id){
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.categoryId = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+    }
     
     
 }
