@@ -11,7 +11,8 @@ export class CategoryService {
     new Category("facades","assets/images/beersmith_facade.jpg","Beersmith facade"),
     new Category("personnages", "assets/images/cafe_society.jpg", "Cafe Society"),
     new Category("accessoires","assets/images/fountain.jpg", "Lighted Fountain"),
-    new Category("animations","assets/images/ballroom.jpg", "Animated Ballroom")
+    new Category("animations","assets/images/ballroom.jpg", "Animated Ballroom"),
+
   ];
 
   constructor() { }

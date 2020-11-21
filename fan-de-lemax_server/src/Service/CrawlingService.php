@@ -9,7 +9,7 @@ class CrawlingService {
      * Get the datas from Lemax main websites by sku(lemax ref) and send price and link
      *
      */
-    public function getDatas($sku){
+    public function getPricesFromShops($sku){
 
         $client = new Client();
         

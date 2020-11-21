@@ -1,6 +1,7 @@
 import { Route } from '@angular/compiler/src/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
+import { RequestsService } from 'src/app/requests.service';
 import { ArticleService } from 'src/app/shared/article.service';
 import { CategoryService } from 'src/app/shared/category.service';
 import { Article } from '../../shared/article.model';
@@ -17,19 +18,29 @@ export class ArticlesListComponent implements OnInit {
   id : number;
   // selectedArticle: Article;
   // isArticleSelected = false;
+  articlesOfOneCategory: Article[]= [];
 
-  constructor(private route: ActivatedRoute, private articleService : ArticleService) {}
+  constructor(private route: ActivatedRoute, private articleService : ArticleService, private requestsService : RequestsService) {}
 
   ngOnInit(): void {
-
+    // this.getCategoryById(1);
     this.route.params.subscribe(
       (params: Params) => {
         this.id = +params['id'];
-        this.articles = this.articleService.getArticlesByCategory(this.id);
+        // this.articles = this.articleService.getArticlesByCategory(this.id);
+        this.requestsService.fetchArticlesByCategory(this.id)
+        .subscribe(categories => {
+          this.articlesOfOneCategory = categories;
+        console.log(this.articlesOfOneCategory)});
       }
     );
     console.log("dans la liste " + this.id);
 
   }
-
+  // getCategoryById(categoryId: number){
+  //   this.requestsService.fetchArticlesByCategory(categoryId)
+  //     .subscribe(categories => {
+  //       this.articlesOfOneCategory = categories;
+  //     console.log(this.articlesOfOneCategory)});
+  // }
 }

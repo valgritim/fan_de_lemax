@@ -24,7 +24,8 @@ class ArticleController extends AbstractController
         $articles = $repository->findAll();      
 
         $json = $serializerInterface->serialize($articles,'json', ['groups' => 'article:read']);
-         
+        
+        
         return new JsonResponse($json, 200,[], true);
         // return $this->json($articles, 200 , [], ['groups' => 'article:read']);       
         
@@ -37,14 +38,14 @@ class ArticleController extends AbstractController
      * @param SerializerInterface $serializerInterface
      * @return JsonResponse
      */
-    public function getRetiredArticles(ArticleRepository $repository, SerializerInterface $serializerInterface)
+    public function getRetiredArticles(ArticleRepository $repository, SerializerInterface $serializerInterface, NormalizerInterface $ni)
     {
-        $articles = $repository->findRetiredArticles();      
-
+        $articles = $repository->findRetiredArticles(); 
+              
         $json = $serializerInterface->serialize($articles,'json', ['groups' => 'article:read']);
-         
+        
         return new JsonResponse($json, 200,[], true);
-        //return $this->json($articles, 200 , [], ['groups' => 'article:read']);       
+        // return $this->json($json, 200 , [], ['groups' => 'article:read']);       
         
     }
 

@@ -5,3 +5,13 @@ a{
 a:hover{
   text-decoration: none;
 }
+.list-group-item.clearfix{
+  width: 22em;
+  height: 27em;
+  margin-bottom: 20px;
+}
+
+.img-responsive{
+  max-width: 20em;
+  min-height: 12.5em;
+}

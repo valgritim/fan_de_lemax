@@ -14,9 +14,9 @@ class CrawlingController extends AbstractController{
     /**
      * @Route("/api/crawling/{sku}", name="api_crawling", methods={"GET"})
      */
-    public function crawlingDatas($sku, CrawlingService $crawlingService){
+    public function crawlingPrices($sku, CrawlingService $crawlingService){
 
-        $result = $crawlingService->getDatas($sku);        
+        $result = $crawlingService->getPricesFromShops($sku);        
         
         return $this->json($result, 200, []);
         

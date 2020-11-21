@@ -17,4 +17,9 @@ export class ArticleDetailComponent implements OnInit {
 
   }
 
+  goBack(){
+    window.history.go(-1);
+    return false;
+  }
+
 }

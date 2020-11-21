@@ -10,7 +10,7 @@ import { MessageService } from './shared/message.service';
 })
 export class RequestsService {
 
-  private articleUrl= 'http://localhost:8000/api/articles/';
+  private articleUrl= 'https://localhost:8000/api/articles/';
   articleArray: Article[] = [];
 
   constructor(private http: HttpClient, private messageService: MessageService) { }

@@ -1,3 +1,4 @@
+import {RequestsService} from './requests.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -15,6 +16,7 @@ import { ArticleService } from './shared/article.service';
 import { ArticleDetailComponent } from './articles/article/article-detail/article-detail.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -33,10 +35,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AppRoutingModule,
     NoopAnimationsModule,
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule
 
   ],
-  providers: [ArticleService],
+  providers: [ArticleService, RequestsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

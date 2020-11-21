@@ -3,16 +3,18 @@
   <h1 class="text-center" *ngSwitchCase="2">Façades</h1>
   <h1 class="text-center" *ngSwitchCase="3">Personnages</h1>
   <h1 class="text-center" *ngSwitchCase="4">Accessoires</h1>
-  <h1 class="text-center" *ngSwitchDefault>Animations</h1>
+  <h1 class="text-center" *ngSwitchCase="5">Animations</h1>
+
 </div>
-<div class="col-md-12" id="displayAll">
-  <app-article
-    *ngFor="let articleEl of articles"
-    [myArticle] = "articleEl"
-  >
-  </app-article>
+<div class="container">
+  <div class="col-md-12 text-center" id="displayAll">
+    <app-article
+      *ngFor="let articleEl of articlesOfOneCategory"
+      [myArticle] = "articleEl"
+    >
+    </app-article>
+  </div>
 </div>
-<!--<div *ngIf="selectedArticle">
-  <app-article-detail [selectedArticle]="selectedArticle" ></app-article-detail>
-</div>-->
+
+
 
