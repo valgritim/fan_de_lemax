@@ -11,6 +11,7 @@ import { MessageService } from './shared/message.service';
 export class RequestsService {
 
   private articleUrl= 'https://localhost:8000/api/articles/';
+  private crawlingPricesUrl = 'https://localhost:8000/api/crawling/';
   articleArray: Article[] = [];
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
@@ -25,6 +26,9 @@ export class RequestsService {
             catchError(err => {throw 'error in fetchArticlesByCategory' + err})
           );
 
+  }
+
+  searchArticlePricesBySku(slu: number){
 
   }
 }

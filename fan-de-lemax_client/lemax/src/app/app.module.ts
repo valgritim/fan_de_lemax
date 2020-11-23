@@ -17,6 +17,7 @@ import { ArticleDetailComponent } from './articles/article/article-detail/articl
 import { CategoriesComponent } from './categories/categories.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { HttpClientModule } from '@angular/common/http';
     NoopAnimationsModule,
     NgbModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxSpinnerModule
 
   ],
   providers: [ArticleService, RequestsService],
