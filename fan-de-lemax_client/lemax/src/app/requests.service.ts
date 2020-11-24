@@ -20,6 +20,10 @@ export class RequestsService {
     this.messageService.add(`requestsService: ${message}`);
   }
 
+  /**
+   * Http request to retrieve articles by category Id
+   * @param categoryId
+   */
   fetchArticlesByCategory(categoryId: number): Observable<Article[]>{
       return this.http.get<Article[]>(this.articleUrl+categoryId)
           .pipe(
@@ -28,7 +32,21 @@ export class RequestsService {
 
   }
 
+  /**
+   * Http request to retrieve articles by sku
+   * @param slu
+   */
   searchArticlePricesBySku(slu: number){
 
+  }
+
+  /**
+   * Http request to retrieve all retired articles
+   */
+  fetchRetiredArticles(): Observable<Article[]>{
+    return this.http.get<Article[]>(this.articleUrl+"retired")
+      .pipe(
+        catchError(err => {throw 'error in fetch retired articles ' + err})
+      );
   }
 }

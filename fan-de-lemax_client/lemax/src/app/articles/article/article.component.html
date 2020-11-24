@@ -4,6 +4,7 @@
     <hr>
     <h4 class="list-group-item-heading text-center">{{ myArticle.name }}</h4>
     <h5 class="text-center">SKU# {{ myArticle.sku }}</h5>
-    <p class="list-group-item-text text-center">Date de sortie : {{ myArticle.released}}</p>
+    <p class="list-group-item-text text-center mb-0">Date de sortie : {{ myArticle.released}}</p>
+    <p class="list-group-item-text text-center" *ngIf="myArticle.retired != null">Date de retrait : {{ myArticle.retired}}</p>
   </div>
 </a>

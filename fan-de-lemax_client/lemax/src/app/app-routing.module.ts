@@ -5,6 +5,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { ArticlesListComponent } from './articles/articles-list/articles-list.component';
 import { ArticleDetailComponent } from './articles/article/article-detail/article-detail.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { RetiredComponent } from './retired/retired.component';
 
 const routes: Routes = [
 
@@ -16,6 +17,7 @@ const routes: Routes = [
         { path: ':id/:sku', component: ArticleDetailComponent}
       ]
   },
+  { path: 'articles/retired', component: RetiredComponent},
   { path: 'not-found', component: NotFoundComponent},
   { path:'**', redirectTo:'not-found'}
 

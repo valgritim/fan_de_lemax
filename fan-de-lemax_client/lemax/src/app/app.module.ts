@@ -18,6 +18,9 @@ import { CategoriesComponent } from './categories/categories.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { RetiredComponent } from './retired/retired.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ScrollToTopComponent } from './shared/scroll-to-top/scroll-to-top.component';
 
 
 @NgModule({
@@ -29,7 +32,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HomeComponent,
     ArticleDetailComponent,
     CategoriesComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    RetiredComponent,
+    ScrollToTopComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgbModule,
     FontAwesomeModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxPaginationModule
 
   ],
   providers: [ArticleService, RequestsService],

@@ -1,16 +1,11 @@
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade-rotating" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
-<div id="list-title" class="mb-5 mt-3" [ngSwitch]=id>
-  <h1 class="text-center" *ngSwitchCase="1">Maisons</h1>
-  <h1 class="text-center" *ngSwitchCase="2">Façades</h1>
-  <h1 class="text-center" *ngSwitchCase="3">Personnages</h1>
-  <h1 class="text-center" *ngSwitchCase="4">Accessoires</h1>
-  <h1 class="text-center" *ngSwitchCase="5">Animations</h1>
-
+<div id="list-title" class="mb-5 mt-3">
+  <h1 class="text-center">Articles retirés</h1>
 </div>
 <div class="container">
   <div class="col-md-12 text-center" id="displayAll">
     <app-article
-      *ngFor="let articleEl of articlesOfOneCategory | paginate: {
+      *ngFor="let articleEl of retiredArticles | paginate: {
         itemsPerPage: 27,
         currentPage : page,
         totalItems : totalRecords }"
@@ -18,9 +13,5 @@
     >
     </app-article>
     <pagination-controls maxSize = "9" directionLinks="true" previousLabel="Previous" nextLabel="Next"  (pageChange)="page = $event"></pagination-controls>
-    <app-scroll-to-top></app-scroll-to-top>
   </div>
 </div>
-
-
-

@@ -17,9 +17,9 @@ import { Article } from '../../shared/article.model';
 export class ArticlesListComponent implements OnInit {
   articles: Article[];
   id : number;
-  // selectedArticle: Article;
-  // isArticleSelected = false;
   articlesOfOneCategory: Article[]= [];
+  page: number = 1;
+  totalRecords: number;
 
   constructor(private route: ActivatedRoute, private articleService : ArticleService, private requestsService : RequestsService, private spinnerService: NgxSpinnerService) {}
 
@@ -34,7 +34,8 @@ export class ArticlesListComponent implements OnInit {
           this.requestsService.fetchArticlesByCategory(this.id)
           .subscribe(categories => {
             this.articlesOfOneCategory = categories;
-          console.log(this.articlesOfOneCategory)});
+            this.totalRecords = categories.length;
+          });
           this.spinnerService.hide();
         }
       );
