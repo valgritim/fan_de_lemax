@@ -49,4 +49,11 @@ export class RequestsService {
         catchError(err => {throw 'error in fetch retired articles ' + err})
       );
   }
+
+  getPricesFromShops(sku: number){
+    return this.http.get(this.crawlingPricesUrl+sku)
+      .pipe(
+        catchError(err => { throw 'error in get prices from shops ' + err})
+      );
+  }
 }

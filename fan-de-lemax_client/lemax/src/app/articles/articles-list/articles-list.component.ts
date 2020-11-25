@@ -25,18 +25,19 @@ export class ArticlesListComponent implements OnInit {
 
   ngOnInit(): void {
     // this.getCategoryById(1);
-
+      this.spinnerService.show();
       this.route.params.subscribe(
         (params: Params) => {
           this.id = +params['id'];
-          this.spinnerService.show();
+
           // this.articles = this.articleService.getArticlesByCategory(this.id);
           this.requestsService.fetchArticlesByCategory(this.id)
           .subscribe(categories => {
             this.articlesOfOneCategory = categories;
             this.totalRecords = categories.length;
+            this.spinnerService.hide();
           });
-          this.spinnerService.hide();
+
         }
       );
 

@@ -7,6 +7,8 @@ use App\Entity\Category;
 use App\Service\CrawlingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CrawlingController extends AbstractController{
@@ -14,11 +16,14 @@ class CrawlingController extends AbstractController{
     /**
      * @Route("/api/crawling/{sku}", name="api_crawling", methods={"GET"})
      */
-    public function crawlingPrices($sku, CrawlingService $crawlingService){
+    public function crawlingPrices($sku, CrawlingService $crawlingService, SerializerInterface $serializerInterface){
 
-        $result = $crawlingService->getPricesFromShops($sku);        
+        $result = $crawlingService->getPricesFromShops($sku);   
+        $json = $serializerInterface->serialize($result,'json');
+               
+        return new JsonResponse($json, 200,[], true);     
         
-        return $this->json($result, 200, []);
+        // return $this->json($result, 200, []);
         
 
     }

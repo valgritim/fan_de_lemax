@@ -1,5 +1,16 @@
 li{
   list-style-type: none;
 }
+#results{
+  display: flex;
+  justify-content: space-evenly;
+}
+.card{
+  width: 16rem;
+}
+.card-text{
+  font-weight: bold;
+  color:red;
+}
 
 

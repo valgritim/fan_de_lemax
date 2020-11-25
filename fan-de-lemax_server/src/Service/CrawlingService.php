@@ -3,6 +3,7 @@ namespace App\Service;
 
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\Validator\Constraints\Length;
 
 class CrawlingService {
     /**
@@ -13,8 +14,11 @@ class CrawlingService {
 
         $client = new Client();
         
-        $crawler1 = $client->request('GET','https://www.felinaworld.com/fr/catalogsearch/result/?q='.$sku);   
-        $crawler2 = $client->request('GET','https://www.wishpel-village.fr/catalogsearch/result/?q='.$sku); 
+        if(strlen($sku)< 5){
+            $sku = "0".$sku;
+        }
+        $crawler1 = $client->request('GET','https://www.felinaworld.com/fr/catalogsearch/result/?q='.$sku);         
+        $crawler2 = $client->request('GET','https://www.wishpel-village.fr/catalogsearch/result/?q='.$sku);
         $crawler3 = $client->request('GET','https://www.desjardins.fr/recherche?controller=search&s='.$sku);
 
         //Search result for Felinaworld------------------------------
@@ -34,6 +38,7 @@ class CrawlingService {
             $lien2 = $crawler1->filter('p.product-name')->html('');
         } else {
             $lien2 = $crawler2->filter('p.product-name > a ')->attr('href');
+            
         }
         
       
@@ -44,21 +49,24 @@ class CrawlingService {
             $lien3 = $crawler3->filter("a.thumbnail")->html('');
         } else {
             $lien3 = $crawler3->filter("a.thumbnail")->attr('href');
+                        
         }
                 
 
             return [
-                "felinaworld" => [
+                [ "name" => "felinaworld",
                     "price" => $result1,
                     "link" => $lien1
                 ],
-                "wishpel" => [
+                [ "name" => "wishpel village",
                     "price" => $result2,
                     "link" => $lien2
+                    
                 ],
-                "desjardins" => [
+                [   "name" => "desjardins",
                     "price" => $result3,
                     "link" => $lien3
+                    
                 ]
             ];
     }

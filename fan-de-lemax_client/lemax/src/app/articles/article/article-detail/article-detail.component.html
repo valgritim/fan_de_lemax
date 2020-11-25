@@ -1,9 +1,11 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade-rotating" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
 <div class="container">
   <div class="col-md-12">
-    <h1>{{ selectedArticle.name }}</h1>
+    <a href="" (click)="goBack()"><fa-icon [icon]="faArrowLeft"></fa-icon> Retourner à la liste</a>
+    <h1 class="mt-3">{{ selectedArticle.name }}</h1>
     <div class="row flex mb-5">
       <div class="col-md-6">
-        <a href="" (click)="goBack()">Retourner à la liste</a>
+
         <img [src]="selectedArticle.imagePath" alt="{{ selectedArticle.name}}">
       </div>
       <div class="offset-1 col-md-5">
@@ -15,10 +17,20 @@
       </div>
     </div>
     <div id="shops">
-      <h3>Vous pouvez trouver {{selectedArticle.name}} chez : </h3>
-      <ul>
-        <li>blablabla </li>
-      </ul>
+      <h3>Vous pouvez trouver "{{selectedArticle.name}}" chez : </h3>
+        <div id="results" class="mb-5 mt-5" *ngIf="results">
+          <div *ngFor="let result of results">
+            <div class="card" *ngIf="result.price != ''">
+              <img src="{{ image }}" alt="" class="card-img-top">
+              <div class="card-body" >
+                <h5 class="card-title">{{ result.name | uppercase}}</h5>
+                <p class="card-text">Cet article est vendu au prix de {{ result.price }}</p>
+                <a href="{{ result.link }}" class="btn btn-primary" target="_blank">Aller vers la boutique</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+
