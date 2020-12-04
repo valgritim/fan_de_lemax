@@ -33,14 +33,6 @@ export class RequestsService {
   }
 
   /**
-   * Http request to retrieve articles by sku
-   * @param slu
-   */
-  searchArticlePricesBySku(slu: number){
-
-  }
-
-  /**
    * Http request to retrieve all retired articles
    */
   fetchRetiredArticles(): Observable<Article[]>{
@@ -49,11 +41,21 @@ export class RequestsService {
         catchError(err => {throw 'error in fetch retired articles ' + err})
       );
   }
-
+  /**
+   * Http request to retrieve articles by sku
+   * @param slu
+   */
   getPricesFromShops(sku: number){
     return this.http.get(this.crawlingPricesUrl+sku)
       .pipe(
         catchError(err => { throw 'error in get prices from shops ' + err})
+      );
+  }
+
+  getAllArticles(): Observable<Article[]>{
+    return this.http.get<Article[]>(this.articleUrl)
+      .pipe(
+        catchError(err => { throw 'error in getting all the articles ' + err})
       );
   }
 }

@@ -7,3 +7,39 @@
   height: 3em;
   width: 5em;
 }
+.modal-content,#modal{
+  width:80em;
+  background-color: #fff;
+}
+a{
+  color:black;
+}
+
+a:hover{
+  text-decoration: none;
+}
+
+#results{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-between;
+}
+
+::ng-deep a.list-group-item.clearfix{
+  width: 18em!important;
+  margin: 2em;
+}
+::ng-deep img.img-responsive{
+  max-width: 16em;
+  min-height: 12.5em;
+}
+.input-group{
+  width: 40em;
+  margin:auto;
+}
+
+
+
+
+
+

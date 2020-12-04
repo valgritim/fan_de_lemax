@@ -21,6 +21,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { RetiredComponent } from './retired/retired.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ScrollToTopComponent } from './shared/scroll-to-top/scroll-to-top.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import { ScrollToTopComponent } from './shared/scroll-to-top/scroll-to-top.compo
     CategoriesComponent,
     NotFoundComponent,
     RetiredComponent,
-    ScrollToTopComponent
+    ScrollToTopComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,9 @@ import { ScrollToTopComponent } from './shared/scroll-to-top/scroll-to-top.compo
     FontAwesomeModule,
     HttpClientModule,
     NgxSpinnerModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule,
+    ReactiveFormsModule
 
   ],
   providers: [ArticleService, RequestsService],

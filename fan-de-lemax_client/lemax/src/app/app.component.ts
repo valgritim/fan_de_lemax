@@ -1,5 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import {NgbCarouselConfig, NgbPaginationNext} from '@ng-bootstrap/ng-bootstrap';
+import { ArticleService } from './shared/article.service';
 
 
 @Component({
@@ -10,7 +12,7 @@ import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 export class AppComponent {
   showNavigationArrows = false;
 
-  constructor(config: NgbCarouselConfig){
+  constructor(config: NgbCarouselConfig, private articleService: ArticleService, private router: Router){
     config.showNavigationArrows = false;
   }
 

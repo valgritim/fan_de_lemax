@@ -7,6 +7,7 @@ import { ArticleDetailComponent } from './articles/article/article-detail/articl
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RetiredComponent } from './retired/retired.component';
 
+
 const routes: Routes = [
 
   { path: '', redirectTo: 'category', pathMatch:'full'},

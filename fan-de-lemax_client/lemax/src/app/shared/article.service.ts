@@ -1,4 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Article } from './article.model';
 
 @Injectable({
@@ -7,6 +8,9 @@ import { Article } from './article.model';
 export class ArticleService {
   articleSelected: Article;
   articlesByCategory: Article [] = [];
+  searchedItem: string = "";
+  searchChanged: Subject<string> = new BehaviorSubject(this.searchedItem);
+
 
   private articles : Article[] = [
     new Article("Normandy Cottage", 65089, "2016", "2020", "https://lemax.imgix.net/images/products/65089.jpg?h=350", 1),
@@ -39,4 +43,14 @@ export class ArticleService {
   setArticleSelected(article: Article){
     this.articleSelected = article;
   }
+
+  // getSearchedItem(){
+  //   // console.log(this.searchedItem);
+  //   this.searchChanged.next(this.searchedItem);
+
+  // }
+
+  // setSearchedItem(item: string){
+  //   this.searchedItem = item;
+  // }
 }

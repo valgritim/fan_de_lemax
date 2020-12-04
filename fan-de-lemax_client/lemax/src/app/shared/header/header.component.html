@@ -30,9 +30,42 @@
         <a class="nav-link" routerLinkactive="active" href="#">S'identifier/Créer un compte</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Rechercher un article" aria-label="Search">
-      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Rechercher</button>
-    </form>
+    <!--<form class="form-inline my-2 my-lg-0" (ngSubmit)="onSubmit()">
+     <input [(ngModel)]="researchItem" name="researchArticle" class="form-control mr-sm-2" placeholder="Rechercher un article" type="search">-->
+      <ng-template #content let-c="close" let-d="dismiss">
+        <div id="modal">
+          <div class="modal-header ml-4">
+            <h4 class="modal-title" id="modal-basic-title">Rechercher un article</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group text-center">
+                <div class="input-group text-center">
+                  <input id="searchedItem"  [formControl]="filter" class="form-control" placeholder="Nom de l'article" type="text">
+                </div>
+              </div>
+            </form>
+            <div id="results">
+              <app-article
+                  *ngFor="let result of filteredResults | async | paginate: {
+                  itemsPerPage: 27,
+                  currentPage : page,
+                  totalItems : totalRecords }"
+                  [myArticle] = "result"
+              ></app-article>
+              <pagination-controls maxSize = "9" directionLinks="true" previousLabel="Previous" nextLabel="Next"  (pageChange)="page = $event"></pagination-controls>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Fermer</button>
+          </div>
+        </div>
+      </ng-template>
+      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit" (click)="onSubmit(content)">Rechercher un article</button>
+
   </div>
 </nav>
