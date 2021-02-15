@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { Article } from 'src/app/shared/article.model';
 import { ArticleService } from 'src/app/shared/article.service';
 
@@ -11,16 +10,17 @@ import { ArticleService } from 'src/app/shared/article.service';
 export class ArticleComponent implements OnInit {
   @Input() myArticle : Article;
 
-  constructor(private articleService: ArticleService, private router: Router) { }
+  constructor(private articleService: ArticleService) { }
 
   ngOnInit(): void {
 
   }
 
   onSelected(){
+    //je passe par un service pour dire l'article sélectionné que je récupère dans le article detail
     this.articleService.setArticleSelected(this.myArticle);
-    console.log(this.myArticle);
-  }
+
+ }
 
 
 

@@ -28,7 +28,7 @@ class AppFixtures extends Fixture
             $user = new User();
             $user->setPassword($this->userPasswordEncoder->encodePassword($user, "password"));
             $user->setUsername(sprintf("email%d@gmail.com", $i));
-            $user->setName(sprintf("name%d", $i));
+            $user->setPseudo(sprintf("pseudo%d", $i));
             $manager->persist($user);           
         }       
         $manager->flush();

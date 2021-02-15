@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
       map(([datas, filterstring])=> datas.filter(result =>
         result.name.toLowerCase().startsWith(filterstring.toLowerCase())))
     );
-
+    this.spinnerService.hide();
   }
 
 

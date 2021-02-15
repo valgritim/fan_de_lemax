@@ -27,7 +27,7 @@
         <a class="nav-link" routerLink="/articles/retired">Articles retirés</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLinkactive="active" href="#">S'identifier/Créer un compte</a>
+        <a class="nav-link" routerLinkactive="active" routerLink='auth'>S'identifier/Créer un compte</a>
       </li>
     </ul>
     <!--<form class="form-inline my-2 my-lg-0" (ngSubmit)="onSubmit()">
@@ -56,6 +56,13 @@
                   totalItems : totalRecords }"
                   [myArticle] = "result"
               ></app-article>
+              <!-- <app-article-search
+              *ngFor="let result of filteredResults | async | paginate: {
+              itemsPerPage: 27,
+              currentPage : page,
+              totalItems : totalRecords }"
+              [myArticle] = "result"
+          ></app-article-search> -->
               <pagination-controls maxSize = "9" directionLinks="true" previousLabel="Previous" nextLabel="Next"  (pageChange)="page = $event"></pagination-controls>
             </div>
           </div>
@@ -66,6 +73,5 @@
         </div>
       </ng-template>
       <button class="btn btn-outline-warning my-2 my-sm-0" type="submit" (click)="onSubmit(content)">Rechercher un article</button>
-
   </div>
 </nav>

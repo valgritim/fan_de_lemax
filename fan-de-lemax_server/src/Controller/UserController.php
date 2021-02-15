@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/user", name="api_user", methods={"GET"})
+     * @Route("api/user", name="api_user", methods={"GET"})
      */
     public function index(UserRepository $userRepository)
     {
@@ -56,7 +56,7 @@ class UserController extends AbstractController
             
             $userInDbPwd = $userInDb->getPassword();
             
-            if($userInDbPwd === $userpassword){
+            if(password_verify($userpassword,$userInDbPwd)){
                 
                 return $this->json( $user, 200, [], ["user:read"]);
             }
@@ -89,6 +89,9 @@ class UserController extends AbstractController
             if(count($errors) > 0){
                 return $this->json($errors, 400);
             }
+
+            $userPasswordHash = password_hash($user->getPassword(), PASSWORD_BCRYPT);
+            $newUser = $user->setPassword($userPasswordHash);
 
             $em->persist($user);
             $em->flush();

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Article;
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -25,14 +26,13 @@ class CategoryRepository extends ServiceEntityRepository
     
     public function findByCategoryName($value)
     {
-        return $this->createQueryBuilder('c')
-            ->join('c.articles', 'a')
-            ->select('c.name as category, a.name as article, a.sku as sku, a.released as released, a.retired as retired, a.imagePath as imagePath')                   
-            ->andWhere('c.name = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getResult()
-        ;
+        // return $this->createQueryBuilder('c')
+        //     ->join('c.article', 'a')
+        //     ->andWhere('c.name = :val')
+        //     ->setParameter('val', $value)            
+        //     ->getQuery()
+        //     ->getResult();
+        
     }
     
 

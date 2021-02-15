@@ -52,7 +52,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $pseudo;
 
 
 
@@ -68,9 +68,14 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getUsername(): string
+    public function getEmail(): ?string
     {
         return (string) $this->email;
+    }
+
+    public function getUserName(): ?string
+    {
+        return $this->email;
     }
 
     public function getPassword(): ?string
@@ -90,8 +95,20 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
     // Setters-------------------------------------------------------------------------------------------------------------
-    public function setUsername(string $email): self {
+    public function setEmail(string $email): self {
+        
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function setUserName(string $email): self {
         
         $this->email = $email;
 
@@ -107,6 +124,13 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
 
         return $this;
     }
@@ -189,17 +213,9 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
 
-        return $this;
-    }
+   
 
     
 }

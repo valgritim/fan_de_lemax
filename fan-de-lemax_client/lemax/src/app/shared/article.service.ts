@@ -1,15 +1,15 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { Article } from './article.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
-  articleSelected: Article;
+  articleSelected: Article ;
   articlesByCategory: Article [] = [];
   searchedItem: string = "";
-  searchChanged: Subject<string> = new BehaviorSubject(this.searchedItem);
 
 
   private articles : Article[] = [
@@ -31,8 +31,8 @@ export class ArticleService {
   getArticlesByCategory(id: number){
     this.articlesByCategory = [];
     this.articles.forEach(article => {
-      if(article.category == id){
-        console.log("article category " + article.category);
+      if(article.categoryId == id){
+        console.log("article category " + article.categoryId);
         this.articlesByCategory.push(article);
       }
     });
@@ -40,8 +40,17 @@ export class ArticleService {
     return this.articlesByCategory;
   }
 
-  setArticleSelected(article: Article){
+  // setArticleSelected(article: Article){
+  //   this.articleSelected = article;
+  //   console.log("dans mon service" + this.articleSelected);
+  // }
+
+  setArticleSelected(article : Article){
     this.articleSelected = article;
+  }
+
+  getArticleSelected(){
+    return this.articleSelected;
   }
 
   // getSearchedItem(){

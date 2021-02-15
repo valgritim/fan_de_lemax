@@ -1,4 +1,4 @@
-<a routerLink="/category/{{myArticle.categoryId}}/{{myArticle.sku}}" class="list-group-item clearfix" (click)="onSelected()">
+<a  href="category/{{myArticle.categoryId}}/{{myArticle.sku}}" class="list-group-item clearfix" (click)="onSelected()">
   <div class="pull-left">
     <img [src]="myArticle.imagePath" alt="{{ myArticle.name }}" class="img-responsive" style="max-height: 200px;">
     <hr>
@@ -9,4 +9,3 @@
 
   </div>
 </a>
-

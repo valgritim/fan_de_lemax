@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CategoryController extends AbstractController{
 
     /**
-     * @Route("api/category/{name}" , name="api_category", methods={"GET"})
+     * @Route("/api/category/{name}" , name="api_category", methods={"GET"})
      *
      * @param String $value
      * 

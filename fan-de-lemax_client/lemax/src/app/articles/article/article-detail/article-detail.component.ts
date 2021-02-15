@@ -5,6 +5,7 @@ import { RequestsService } from 'src/app/requests.service';
 import { Article } from 'src/app/shared/article.model';
 import { ArticleService } from 'src/app/shared/article.service';
 import { faArrowLeft, faOtter } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-article-detail',
@@ -18,11 +19,14 @@ export class ArticleDetailComponent implements OnInit {
   results: any[] = [];
   image: string = "assets/images/cadeau.jpg";
 
-  constructor(private articleService: ArticleService, private route: ActivatedRoute, private spinnerService: NgxSpinnerService, private requestsService : RequestsService) { }
+  constructor(private articleService: ArticleService, private route: ActivatedRoute, private spinnerService: NgxSpinnerService, private requestsService : RequestsService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.spinnerService.show();
     this.selectedArticle = this.articleService.articleSelected;
+
+
+      console.log("dans article detail" + this.selectedArticle);//Undefined quand vient de article search
  // this.articles = this.articleService.getArticlesByCategory(this.id);
 
     this.route.params.subscribe(
@@ -33,6 +37,7 @@ export class ArticleDetailComponent implements OnInit {
         .subscribe(prices => {
           this.results = prices as string[];
           this.spinnerService.hide();
+          this.modalService.dismissAll();
         });
 
       }

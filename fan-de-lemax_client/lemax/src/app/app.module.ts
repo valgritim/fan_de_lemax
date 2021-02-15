@@ -22,7 +22,10 @@ import { RetiredComponent } from './retired/retired.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ScrollToTopComponent } from './shared/scroll-to-top/scroll-to-top.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { ArticleSearchComponent } from './articles/article/article-search/article-search.component';
+import { AuthComponent} from './auth/auth.component';
+import { AccountComponent } from './auth/account/account.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 
 @NgModule({
@@ -37,6 +40,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NotFoundComponent,
     RetiredComponent,
     ScrollToTopComponent,
+    ArticleSearchComponent,
+    AuthComponent,
+    AccountComponent,
+    RegisterComponent
 
   ],
   imports: [

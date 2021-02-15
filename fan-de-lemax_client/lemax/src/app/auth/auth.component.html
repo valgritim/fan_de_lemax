@@ -1,0 +1,85 @@
+<section class="container">
+  <h1 class="h2 text-center mb-5 mt-3">Accès Collectionneur</h1>
+  <div class="row justify-content-center">
+
+<!-- PARTIE FORMULAIRE DE CONNEXION -->
+    <div class="col-md-6 p-5" *ngIf="this.isLoginMode === true">
+      <h3 class=" text-center">Collectionneurs enregistrés</h3>
+      <hr>
+      <p>Si vous avez un compte, connectez-vous avec votre email.</p>
+
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmitSignIn()" id="login" novalidate>
+        <div class="form-group">
+          <label for="email">Adresse Email</label>
+          <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp"
+            placeholder="Entrez votre email" >
+          <span
+            *ngIf="!signInForm.get('email').valid && registerForm.get('email').touched"
+            class="help-block">Veuillez entrer un email valide!
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" class="form-control" id="password" formControlName="password" placeholder="Entrez votre mot de passe" >
+          <span
+            *ngIf="!signInForm.get('password').valid && registerForm.get('password').touched"
+            class="help-block">Veuillez entrer un mot de passe valide, minimum 8 caractères!
+          </span>
+        </div>
+        <button type="submit" class="btn btn-primary mr-3">Me connecter</button>
+        <a href="" class="text-primary">Mot de passe oublié ?</a>
+      </form>
+    </div>
+
+<!-- PARTIE FORMULAIRE DE CREATION DE COMPTE -->
+
+    <div class="col-md-6 p-5" *ngIf="this.isLoginMode === true">
+      <h3 class="text-center">Nouveaux Collectionneurs</h3>
+      <hr>
+      <p>La création d'un compte vous permet de créer votre collection personnelle de maisons et accessoires Lemax, de
+        commenter et noter les objets Lemax, de créer la liste de vos envies... et bien d'autres fonctionnalités!</p>
+      <button class="btn btn-primary" type="button" (click)="onRegisterMode()">Créer mon compte Collectionneur</button>
+    </div>
+    <div class="col-md-6" *ngIf="this.isLoginMode === false" id="registerDiv">
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()" id="register" class="mb-5">
+        <div class="form-group">
+          <label for="email">Adresse Email</label>
+          <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp"
+            placeholder="Entrez votre adresse email" >
+            <span
+              *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched"
+              class="help-block">Veuillez entrer un email valide!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="pseudo">Entrez un pseudo</label>
+          <input type="text" class="form-control" id="pseudo" formControlName="pseudo" aria-describedby="pseudoHelp"
+            placeholder="Entrez votre pseudo" >
+            <span
+              *ngIf="!registerForm.get('pseudo').valid && registerForm.get('pseudo').touched"
+              class="help-block">Votre pseudo doit contenir au moins 2 lettres!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" class="form-control" id="password" formControlName="password" placeholder="Entrez votre mot de passe" >
+          <span
+              *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched"
+              class="help-block">Veuillez entrer un mot de passe valide, minimum 8 caractères!
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="verifPassword">Vérification du Mot de passe</label>
+          <input type="password" class="form-control" id="verifPassword" formControlName="verifPassword" placeholder="Entrez à nouveau votre mot de passe" >
+          <span
+          *ngIf="!registerForm.get('verifPassword').valid && registerForm.get('verifPassword').touched"
+          class="help-block">Veuillez entrer le même mot de passe!
+      </span>
+        </div>
+        <button type="submit" class="btn btn-primary mr-3">M'enregistrer</button>
+      </form>
+      <a (click)="onReturnConnectionForm()"><fa-icon [icon]="faBackspace"></fa-icon> Oups! J'ai déjà un compte! Retour vers la connexion.</a>
+    </div>
+  </div>
+</section>

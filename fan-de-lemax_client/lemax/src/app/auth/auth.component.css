@@ -1,0 +1,19 @@
+fa-icon, a:not([href]):not([class]){
+  color: rgb(165, 42, 42);
+}
+#registerDiv{
+  margin-bottom: 2rem;;
+}
+
+a:not([href]):not([class]):hover {
+  color:  rgb(165, 42, 42);
+  text-decoration: none;
+  cursor: pointer;
+}
+input.ng-invalid.ng-touched{
+  border: 2px solid  rgb(160, 40, 40);
+}
+span{
+  color: rgb(165, 42, 42);
+  font-weight: bold;
+}

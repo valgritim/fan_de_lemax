@@ -5,7 +5,7 @@ export class Article {
   public released: string;
   public retired: string = null;
   public imagePath : string;
-  public category : number;
+  public categoryId : number;
 
   constructor(name: string, sku: number, released: string, retired: string, imagePath: string, category: number){
     this.name = name;
@@ -13,7 +13,7 @@ export class Article {
     this.released = released;
     this.retired = retired;
     this.imagePath = imagePath;
-    this.category = category;
+    this.categoryId = category;
 
   }
 }
