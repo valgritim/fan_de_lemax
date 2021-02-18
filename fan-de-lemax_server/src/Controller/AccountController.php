@@ -10,8 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AccountController extends AbstractController
 {
     /**
-     * @Route("/api/account", name="account")
-     * @IsGranted("ROLE_USER")
+     * @Route("/api/account", name="account",methods={"GET"})
+     * 
      */
     public function index(): Response
     {

@@ -3,18 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use \Firebase\JWT\JWT;
+use Firebase\JWT\JWT;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 
 class AuthController extends AbstractController
 {
@@ -41,22 +43,17 @@ class AuthController extends AbstractController
     /**
      * @Route("/api/login", name="api_login", methods={"POST"})
      */
-    public function login(Request $request, UserRepository $userRepository, SerializerInterface $serializer, ValidatorInterface $validator, UserPasswordEncoderInterface $encoder){
+    public function login(Request $request, UserRepository $userRepository, SerializerInterface $serializer, UserPasswordEncoderInterface $encoder){
         
-        $data = $request->getContent(); 
-              
+        $data = $request->getContent();
+               
         $user = $serializer->deserialize($data, User::class,'json');
-       
-        $errors = $validator->validate($user); 
-        
-        if(count($errors) > 0){
-            return $this->json($errors, 400);
-        }
-
+    
         $userInDb = $userRepository->findOneBy(['email' => $user->getEmail()]);
+        
+        if(!$userInDb){
 
-        if($userInDb == null){
-            return $this->json($errors, 400);
+            return new JsonResponse(['message' => 'User unknown'], Response::HTTP_NOT_FOUND);
         }
                 
         $isValid = $encoder->isPasswordValid($userInDb, $user->getPassword());
@@ -65,18 +62,24 @@ class AuthController extends AbstractController
             return $this->json([
                 'message' => 'email or password is wrong!',
             ]);
+         
         }
+        $expiration = time() + 3600;
 
         $payload = [
-            "user" => $userInDb->getUserName(),
-            "exp" => (new \DateTime())->modify("+5 minutes")->getTimestamp(),
+            "id" => $userInDb->getId(),
+            "user" => $userInDb->getUsername(),
+            "exp" => $expiration
         ];
 
-        // $jwt = JWT::encode($payload, $this->getParameter('jwt_secret'), 'HS256');
-
-        return $this->json($userInDb, 200, [], ["user:ok"]);      
-       
+        $jwt = JWT::encode($payload, $this->getParameter('jwt_secret'), 'HS256');        
         
+        return $this->json([
+            'message' => 'success',
+            'token' => sprintf('Bearer %s', $jwt)
+        ]); 
+      
+               
     }
 
     /**
@@ -84,24 +87,17 @@ class AuthController extends AbstractController
      *
      * 
      */
-    public function register(Request $request, UserRepository $userRepository, EntityManagerInterface $em,SerializerInterface $serializer, ValidatorInterface $validator, UserPasswordEncoderInterface $encoder){
+    public function register(Request $request, UserRepository $userRepository, EntityManagerInterface $em,SerializerInterface $serializer, UserPasswordEncoderInterface $encoder){
 
         $errors = [];
 
         $jsonRecu = $request->getContent();
+        
 
         try{
 
             $user = $serializer->deserialize($jsonRecu, User::class, 'json');
                        
-            $errors = $validator->validate($user);            
-
-            if(count($errors) > 0){
-                return $this->json([
-                    'errors' => $errors
-                ], 400);
-            }
-
             $password = $user->getPassword();
             $user->setPassword($encoder->encodePassword($user, $password));
             $user->setRoles(['ROLE_USER']); 
@@ -109,11 +105,11 @@ class AuthController extends AbstractController
             $em->persist($user);
             $em->flush();
             //201 status=> created on server
-            $userInDb = $userRepository->findOneBy($user->getEmail());
+            $userInDb = $userRepository->findOneBy(array('email' => $user->getEmail()));
 
             //Serializing db return
             $json = $serializer->serialize($userInDb, 'json', []);
-            return $this->json($userInDb, 201, [], ["user:created"]);
+            return $this->json($$json, 201, [], ["user:created"]);
 
         } 
         
@@ -130,9 +126,8 @@ class AuthController extends AbstractController
     }
 
     /**
-     * @Route("/profile", name="api_profile")
+     * @Route("api/profile", name="profile", methods={"GET"}) 
      * @IsGranted("ROLE_USER")
-     * 
      */
     public function getProfile(){
 
@@ -142,13 +137,16 @@ class AuthController extends AbstractController
             ]
         );
     }
+
     /**
-     * @Route("/logout", name="api_logout")
+     * @Route("/logout", name="api_logout", methods={"GET"})
      *
      * @return void
      */
-    public function logout(){
+    public function logout(){        
 
     }
+
+
 
 }

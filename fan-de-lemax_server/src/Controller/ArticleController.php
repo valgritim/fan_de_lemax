@@ -51,7 +51,7 @@ class ArticleController extends AbstractController
 
     /**
      * Retourne un article selon l'id entré
-     * @Route("/api/articles/article/{id}", name="api_articles_article", methods={"GET"})
+     * @Route("/api/articles/id/{id}", name="api_articles_article", methods={"GET"})
      * @var $id
      * @param ArticleRepository $repository
      * @param SerializerInterface $serializerInterface
