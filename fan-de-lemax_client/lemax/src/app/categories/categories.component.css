@@ -5,6 +5,10 @@
 .custom-img{
     list-style-type: none;
     float: left;
+    transition: all .2s ease-in-out;
+}
+.custom-img:hover{
+  transform: scale(1.2);
 }
 .custom-img > a > img{
   border: 3px solid lightgray;

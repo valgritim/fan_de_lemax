@@ -4,11 +4,12 @@
     <a href="" (click)="goBack()"><fa-icon [icon]="faArrowLeft"></fa-icon> Retourner à la liste</a>
     <h1 class="mt-4 mb-2">{{ selectedArticle.name }}</h1>
     <div class="row flex mb-5">
-      <div class="col-md-6">
 
-        <img [src]="selectedArticle.imagePath" alt="{{ selectedArticle.name}}">
+      <div class="col-md-7" id="img-container">
+        <img src="{{selectedArticle.imagePath}}" alt="{{ selectedArticle.name}}" id="myimage">
       </div>
-      <div class="offset-1 col-md-5">
+
+      <div class="offset-1 col-md-4 pt-5">
         <h2>Détails de l'article</h2>
         <h3>SKU#: {{ selectedArticle.sku }}</h3>
         <p>Date de sortie: {{ selectedArticle.released}}</p>
@@ -33,4 +34,3 @@
       </div>
     </div>
   </div>
-

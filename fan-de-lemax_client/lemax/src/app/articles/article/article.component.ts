@@ -25,7 +25,9 @@ export class ArticleComponent implements OnInit {
     this.articleService.setArticleSelected(this.myArticle);
 
  }
+ onAddToMyCollection(){
 
+ }
 
 
 }

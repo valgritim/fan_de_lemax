@@ -13,4 +13,21 @@ li{
   color:red;
 }
 
+#img-container{
+  position: relative;
+}
 
+#myimage
+{
+  width: 500px;
+  height: 500px;
+}
+
+.img-magnifier-glass {
+  position: absolute;
+  border: 3px solid rgb(255, 255, 255);
+  cursor: none;
+  /*Set the size of the magnifier glass:*/
+  width: 300px;
+  height: 300px;
+}

@@ -1,13 +1,13 @@
 <section class="container">
-  <h1 class="h2 text-center mb-5 mt-3">Accès Collectionneur</h1>
+  <h1 class="text-center mb-5 mt-3 animate__animated animate__bounceInDown" >Accès Collectionneur</h1>
   <div class="row justify-content-center">
 
 <!-- PARTIE FORMULAIRE DE CONNEXION -->
-    <div *ngIf="this.isLoading">
-      <app-little-spinner></app-little-spinner>
-    </div>
-    <div class="col-md-6 p-5" *ngIf="this.isLoginMode && !this.isLoading">
 
+    <div class="col-md-6 p-5 animate__animated animate__slideInUp" *ngIf="this.isLoginMode && !this.isLoading">
+      <div *ngIf="this.isLoading">
+        <app-little-spinner></app-little-spinner>
+      </div>
       <h3 class=" text-center">Collectionneurs enregistrés</h3>
       <hr>
       <p>Si vous avez un compte, connectez-vous avec votre email.</p>
@@ -43,14 +43,14 @@
 
 <!-- PARTIE FORMULAIRE DE CREATION DE COMPTE -->
 
-    <div class="col-md-6 p-5" *ngIf="this.isLoginMode">
+    <div class="col-md-6 p-5  animate__animated animate__slideInUp" *ngIf="this.isLoginMode">
       <h3 class="text-center">Nouveaux Collectionneurs</h3>
       <hr>
       <p>La création d'un compte vous permet de créer votre collection personnelle de maisons et accessoires Lemax, de
         commenter et noter les objets Lemax, de créer la liste de vos envies... et bien d'autres fonctionnalités!</p>
       <button class="btn btn-primary" type="button" (click)="onRegisterMode()">Créer mon compte Collectionneur</button>
     </div>
-    <div class="col-md-6" *ngIf="this.isLoginMode === false && !this.isLoading" id="registerDiv">
+    <div class="col-md-6 animate__animated animate__slideInUp" *ngIf="this.isLoginMode === false && !this.isLoading" id="registerDiv">
       <div class="alert alert-danger text-center" *ngIf="error">
         {{ error }}
       </div>
