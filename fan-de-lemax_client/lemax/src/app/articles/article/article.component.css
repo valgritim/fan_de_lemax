@@ -15,3 +15,12 @@ a:hover{
   max-width: 20em;
   min-height: 12.5em;
 }
+.btn{
+  position:absolute;
+  bottom: 3%;
+  left: 15%;
+}
+.btn:hover{
+  background-color: steelblue;
+  border-color: steelblue;
+}

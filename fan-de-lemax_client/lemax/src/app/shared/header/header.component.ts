@@ -5,6 +5,7 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable, combineLatest, of } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/auth.service';
 import { RequestsService } from 'src/app/requests.service';
 import { Article } from '../article.model';
 import { ArticleService } from '../article.service';
@@ -27,8 +28,10 @@ export class HeaderComponent implements OnInit {
   filter: FormControl;
   filters: Observable<string>;
   filteredResults: Observable<Article[]>;
+  logginState: boolean;
 
-  constructor(private articleService: ArticleService, private config: NgbModalConfig, private modalService: NgbModal, private requestService: RequestsService, private spinnerService: NgxSpinnerService) {
+
+  constructor(private articleService: ArticleService, private config: NgbModalConfig, private modalService: NgbModal, private requestService: RequestsService, private spinnerService: NgxSpinnerService, private authService: AuthService) {
     config.backdrop = 'static';
     config.keyboard = false;
 
@@ -36,6 +39,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.authService.getLogginStateValue().subscribe(value => {
+      this.logginState = value;
+    })
   }
   onSubmit(content){
     // console.log(this.researchItem);
@@ -54,7 +60,9 @@ export class HeaderComponent implements OnInit {
     this.spinnerService.hide();
   }
 
-
+  logout(){
+    this.authService.logout();
+  }
 
 
 }

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Article } from 'src/app/shared/article.model';
 import { ArticleService } from 'src/app/shared/article.service';
 
@@ -9,11 +10,14 @@ import { ArticleService } from 'src/app/shared/article.service';
 })
 export class ArticleComponent implements OnInit {
   @Input() myArticle : Article;
+  logginState: boolean;
 
-  constructor(private articleService: ArticleService) { }
+  constructor(private articleService: ArticleService, private authService: AuthService) { }
 
   ngOnInit(): void {
-
+    this.authService.getLogginStateValue().subscribe(value => {
+      this.logginState = value;
+    })
   }
 
   onSelected(){

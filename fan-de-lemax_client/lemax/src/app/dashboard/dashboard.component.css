@@ -1,0 +1,44 @@
+#dashboardSection{
+  border: 7px solid #fff;
+  background-color: gainsboro;
+}
+.page-header {
+  position: fixed;
+  background-color: #242e42;
+  color: #fff;
+  position: relative;
+  overflow: auto;
+  padding-top: 20px;
+  margin-bottom: 100px;
+}
+
+.page-header nav {
+  display: flex;
+  flex-direction: column;
+}
+img.sleigh{
+  color:#fff;
+  height:0.8em;
+  width: 0.8em;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+li{
+  padding-top: 1em;
+}
+.tab-content{
+  background-color: #fff;
+  border-radius: 5%;
+  margin: 3em;
+}
+.tab-content p{
+  font-size:2rem;
+  color: rgb(84, 0, 0);
+}

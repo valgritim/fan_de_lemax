@@ -1,4 +1,5 @@
 import {RequestsService} from './requests.service';
+import {AuthService} from './auth/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -24,8 +25,10 @@ import { ScrollToTopComponent } from './shared/scroll-to-top/scroll-to-top.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArticleSearchComponent } from './articles/article/article-search/article-search.component';
 import { AuthComponent} from './auth/auth.component';
-import { AccountComponent } from './auth/account/account.component';
-import { RegisterComponent } from './auth/register/register.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LittleSpinnerComponent } from './shared/little-spinner/little-spinner.component';
+
+
 
 
 @NgModule({
@@ -42,8 +45,9 @@ import { RegisterComponent } from './auth/register/register.component';
     ScrollToTopComponent,
     ArticleSearchComponent,
     AuthComponent,
-    AccountComponent,
-    RegisterComponent
+    DashboardComponent,
+    LittleSpinnerComponent,
+
 
   ],
   imports: [
@@ -59,7 +63,7 @@ import { RegisterComponent } from './auth/register/register.component';
     ReactiveFormsModule
 
   ],
-  providers: [ArticleService, RequestsService],
+  providers: [ArticleService, RequestsService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -16,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 
 class AuthController extends AbstractController
 {
@@ -46,14 +46,14 @@ class AuthController extends AbstractController
     public function login(Request $request, UserRepository $userRepository, SerializerInterface $serializer, UserPasswordEncoderInterface $encoder){
         
         $data = $request->getContent();
-               
-        $user = $serializer->deserialize($data, User::class,'json');
-    
-        $userInDb = $userRepository->findOneBy(['email' => $user->getEmail()]);
         
+        $user = $serializer->deserialize($data, User::class,'json');
+        // dd($user);
+        $userInDb = $userRepository->findOneBy(['email' => $user->getEmail()]);
+        // dd($userInDb);
         if(!$userInDb){
 
-            return new JsonResponse(['message' => 'User unknown'], Response::HTTP_NOT_FOUND);
+            return new JsonResponse(['message' => 'User unknown'], Response::HTTP_NOT_FOUND, [], true);
         }
                 
         $isValid = $encoder->isPasswordValid($userInDb, $user->getPassword());
@@ -72,14 +72,12 @@ class AuthController extends AbstractController
             "exp" => $expiration
         ];
 
-        $jwt = JWT::encode($payload, $this->getParameter('jwt_secret'), 'HS256');        
+        $jwt = JWT::encode($payload, $this->getParameter('jwt_secret'), 'HS256');
+        $userInDb = $userInDb-> setToken($jwt);      
+        $serializedUser = $serializer->serialize($userInDb, 'json', ['groups' => 'user:register']);
         
-        return $this->json([
-            'message' => 'success',
-            'token' => sprintf('Bearer %s', $jwt)
-        ]); 
-      
-               
+        return new JsonResponse($serializedUser, 200,['Authorization' => 'Bearer '.$jwt], true);
+        
     }
 
     /**
@@ -91,8 +89,7 @@ class AuthController extends AbstractController
 
         $errors = [];
 
-        $jsonRecu = $request->getContent();
-        
+        $jsonRecu = $request->getContent();        
 
         try{
 
@@ -102,15 +99,19 @@ class AuthController extends AbstractController
             $user->setPassword($encoder->encodePassword($user, $password));
             $user->setRoles(['ROLE_USER']); 
 
+            $isUserInDb = $userRepository->findOneBy(array('email' => $user->getEmail()));
+
+            if($isUserInDb){
+                return new Response('User already exists', 400, []);
+            }
+
             $em->persist($user);
             $em->flush();
             //201 status=> created on server
             $userInDb = $userRepository->findOneBy(array('email' => $user->getEmail()));
-
-            //Serializing db return
-            $json = $serializer->serialize($userInDb, 'json', []);
-            return $this->json($$json, 201, [], ["user:created"]);
-
+            $serializedUser = $serializer->serialize($userInDb, 'json', ['groups' => 'user:register']);
+                        
+            return new JsonResponse($serializedUser, 201,[], true);
         } 
         
         catch(UniqueConstraintViolationException $e){
@@ -118,11 +119,9 @@ class AuthController extends AbstractController
         }
 
         catch(NotEncodableValueException $e){
-            return $this->json([
-                'status' => 400,
-                'message' => $e
-            ]);
-        }  
+            return new Response($e, 400,[]);
+        }
+        
     }
 
     /**

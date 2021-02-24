@@ -22,14 +22,14 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     *
+     * @Groups("user:register")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\Email
-     * 
+     * @Groups("user:register")
      */
     private $email;
 
@@ -39,8 +39,9 @@ class User implements UserInterface
      */
     private $password;
 
-        /**
+    /**
      * @ORM\Column(type="json")
+     * @Groups("user:register")
      */
     private $roles = [];
 
@@ -56,8 +57,16 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("user:register")
      */
     private $pseudo;
+    /**
+     * Not mapped in DB
+     * @Groups("user:register")
+     *
+     * @var string
+     */
+    private $token;
 
 
 
@@ -105,6 +114,10 @@ class User implements UserInterface
         return $this->pseudo;
     }
 
+    public function getToken(): ?string {
+        return $this->token;
+    }
+
     // Setters-------------------------------------------------------------------------------------------------------------
     public function setEmail(string $email): self {
         
@@ -136,6 +149,13 @@ class User implements UserInterface
     public function setPseudo(string $pseudo): self
     {
         $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    public function setToken(string $token): self
+    {
+        $this->token = $token;
 
         return $this;
     }

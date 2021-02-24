@@ -7,8 +7,8 @@ import { ArticleDetailComponent } from './articles/article/article-detail/articl
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RetiredComponent } from './retired/retired.component';
 import { AuthComponent } from './auth/auth.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { AccountComponent } from './auth/account/account.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
@@ -23,6 +23,7 @@ const routes: Routes = [
   },
   { path: 'articles/retired', component: RetiredComponent},
   { path: 'auth', component: AuthComponent},
+  { path: 'dashboard',  canActivate: [AuthGuard],component: DashboardComponent},
   { path: 'not-found', component: NotFoundComponent},
   { path:'**', redirectTo:'not-found'}
 

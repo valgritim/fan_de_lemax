@@ -27,7 +27,17 @@
         <a class="nav-link" routerLink="/articles/retired">Articles retirés</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLinkactive="active" routerLink='auth'>S'identifier/Créer un compte</a>
+        <a class="nav-link"  routerLinkactive="active" routerLink='auth' *ngIf="!logginState">S'identifier/Créer un compte</a>
+      </li>
+      <li class="nav-item dropdown" *ngIf="logginState">
+        <a class="nav-link dropdown-toggle" routerLinkActive="active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Mon compte Collectionneur
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+          <a class="dropdown-item" routerLink="/dashboard">Mon tableau de bord</a>
+          <a type="button" class="dropdown-item" (click)="logout()">Se déconnecter</a>
+        </div>
+
       </li>
     </ul>
     <!--<form class="form-inline my-2 my-lg-0" (ngSubmit)="onSubmit()">

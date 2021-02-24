@@ -3,45 +3,57 @@
   <div class="row justify-content-center">
 
 <!-- PARTIE FORMULAIRE DE CONNEXION -->
-    <div class="col-md-6 p-5" *ngIf="this.isLoginMode === true">
+    <div *ngIf="this.isLoading">
+      <app-little-spinner></app-little-spinner>
+    </div>
+    <div class="col-md-6 p-5" *ngIf="this.isLoginMode && !this.isLoading">
+
       <h3 class=" text-center">Collectionneurs enregistrés</h3>
       <hr>
       <p>Si vous avez un compte, connectez-vous avec votre email.</p>
 
-      <form [formGroup]="signInForm" (ngSubmit)="onSubmitSignIn()" id="login" novalidate>
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmitSignIn()" id="login">
         <div class="form-group">
           <label for="email">Adresse Email</label>
           <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp"
             placeholder="Entrez votre email" >
           <span
-            *ngIf="!signInForm.get('email').valid && registerForm.get('email').touched"
-            class="help-block">Veuillez entrer un email valide!
+            *ngIf="!signInForm.get('email').valid && signInForm.get('email').touched"
+            class="help-block">
+            <span
+            *ngIf="signInForm.get('email').errors['required']"
+            class="help-block">Veuillez entrer un email</span>
+            <span
+            *ngIf="signInForm.get('email').errors['email']"
+            class="help-block">Veuillez entrer un email valide!</span>
           </span>
         </div>
         <div class="form-group">
           <label for="password">Mot de passe</label>
           <input type="password" class="form-control" id="password" formControlName="password" placeholder="Entrez votre mot de passe" >
           <span
-            *ngIf="!signInForm.get('password').valid && registerForm.get('password').touched"
+            *ngIf="!signInForm.get('password').valid && signInForm.get('password').touched"
             class="help-block">Veuillez entrer un mot de passe valide, minimum 8 caractères!
           </span>
         </div>
-        <button type="submit" class="btn btn-primary mr-3">Me connecter</button>
+        <button type="submit" class="btn btn-primary mr-3" [disabled]="!signInForm.valid">Me connecter</button>
         <a href="" class="text-primary">Mot de passe oublié ?</a>
       </form>
     </div>
 
 <!-- PARTIE FORMULAIRE DE CREATION DE COMPTE -->
 
-    <div class="col-md-6 p-5" *ngIf="this.isLoginMode === true">
+    <div class="col-md-6 p-5" *ngIf="this.isLoginMode">
       <h3 class="text-center">Nouveaux Collectionneurs</h3>
       <hr>
       <p>La création d'un compte vous permet de créer votre collection personnelle de maisons et accessoires Lemax, de
         commenter et noter les objets Lemax, de créer la liste de vos envies... et bien d'autres fonctionnalités!</p>
       <button class="btn btn-primary" type="button" (click)="onRegisterMode()">Créer mon compte Collectionneur</button>
     </div>
-    <div class="col-md-6" *ngIf="this.isLoginMode === false" id="registerDiv">
-
+    <div class="col-md-6" *ngIf="this.isLoginMode === false && !this.isLoading" id="registerDiv">
+      <div class="alert alert-danger text-center" *ngIf="error">
+        {{ error }}
+      </div>
       <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()" id="register" class="mb-5">
         <div class="form-group">
           <label for="email">Adresse Email</label>
@@ -62,22 +74,14 @@
             </span>
         </div>
         <div class="form-group">
-          <label for="password">Mot de passe</label>
+          <label for="password">Mot de passe (Min. 8 caractères)</label>
           <input type="password" class="form-control" id="password" formControlName="password" placeholder="Entrez votre mot de passe" >
           <span
               *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched"
               class="help-block">Veuillez entrer un mot de passe valide, minimum 8 caractères!
           </span>
         </div>
-        <div class="form-group">
-          <label for="verifPassword">Vérification du Mot de passe</label>
-          <input type="password" class="form-control" id="verifPassword" formControlName="verifPassword" placeholder="Entrez à nouveau votre mot de passe" >
-          <span
-          *ngIf="!registerForm.get('verifPassword').valid && registerForm.get('verifPassword').touched"
-          class="help-block">Veuillez entrer le même mot de passe!
-      </span>
-        </div>
-        <button type="submit" class="btn btn-primary mr-3">M'enregistrer</button>
+        <button type="submit" class="btn btn-primary mr-3" [disabled]="!registerForm.valid">M'enregistrer</button>
       </form>
       <a (click)="onReturnConnectionForm()"><fa-icon [icon]="faBackspace"></fa-icon> Oups! J'ai déjà un compte! Retour vers la connexion.</a>
     </div>
