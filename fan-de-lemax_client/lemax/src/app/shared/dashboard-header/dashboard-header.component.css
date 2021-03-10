@@ -1,0 +1,60 @@
+.page-header {
+  background-color: #242e42;
+  color: #fff;
+  position: relative;
+  padding: 10px 20px;
+  margin-bottom: 100px;
+  min-width: 18rem;  
+}
+
+.page-header nav {
+  display: flex;
+  flex-direction: column;
+}
+
+ul {
+  list-style: none;
+  padding-inline-start: 0.8rem;
+}
+
+li.db-header{
+  padding-top: 1em;
+}
+
+li.db-header a {
+  text-decoration: none;
+  min-width: 12rem;
+}
+
+.myButton {
+  min-width: 16em;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	background-color:#fff;
+	border-radius:6px;
+  text-align:center;   padding:16px 18px 14px;   margin: 12px;
+	border:2px solid rgb(206, 108, 108);
+	display:inline-block;
+	cursor:pointer;
+	color:#212529;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 6px;
+	text-decoration:none;
+	-webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  transition: all 0.1s;
+  -webkit-box-shadow: 0px 6px 0px rgb(84, 0, 0);
+  -moz-box-shadow: 0px 6px 0px rgb(84, 0, 0);
+  box-shadow: 0px 6px 0px rgb(84, 0, 0);
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #f7f5f5 5%, #ccabab 100%);
+	background-color:#dfdfdf;
+}
+.myButton:active {
+  -webkit-box-shadow: 0px 2px 0px rgb(84, 0, 0);
+  -moz-box-shadow: 0px 2px 0px rgb(84, 0, 0);
+  box-shadow: 0px 2px 0px rgb(84, 0, 0);
+  position:relative;     top:4px;
+  }

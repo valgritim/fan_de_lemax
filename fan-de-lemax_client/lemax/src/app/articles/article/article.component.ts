@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
+import { RequestsService } from 'src/app/requests.service';
 import { Article } from 'src/app/shared/article.model';
 import { ArticleService } from 'src/app/shared/article.service';
 
@@ -11,13 +12,32 @@ import { ArticleService } from 'src/app/shared/article.service';
 export class ArticleComponent implements OnInit {
   @Input() myArticle : Article;
   logginState: boolean;
+  @Input() isInUserAccount: boolean;
+  articleId : number;
+  userId : number;
+  message : any;
+  error: string;
+  successMessage : string = "";
+  show: boolean = false;
+  buttonShow: boolean = true;
+  isPresent: boolean = false;
 
-  constructor(private articleService: ArticleService, private authService: AuthService) { }
+
+  constructor(private articleService: ArticleService, private authService: AuthService, private requestsService : RequestsService) { }
 
   ngOnInit(): void {
     this.authService.getLogginStateValue().subscribe(value => {
       this.logginState = value;
-    })
+    });
+
+    if(localStorage.getItem("id")){
+
+      this.articleService.checkIfArticleIsOwned(this.myArticle.id)
+          .subscribe(value => {
+            this.isPresent = value;
+            console.log("dans article init check" + this.isPresent);
+          })
+    }
   }
 
   onSelected(){
@@ -25,7 +45,26 @@ export class ArticleComponent implements OnInit {
     this.articleService.setArticleSelected(this.myArticle);
 
  }
- onAddToMyCollection(){
+ onAddToMyCollection($event){
+    ($event.target as HTMLButtonElement).remove;
+    this.articleId = parseInt(this.myArticle.id);
+
+    this.userId = parseInt(localStorage.getItem('id'));
+
+    this.requestsService.addArticleByUser(this.userId, this.articleId)
+    .subscribe(result => {
+      this.message = result
+    }, errorMessage => {
+      this.error = errorMessage;
+    });
+
+    this.articleService.addOneArticleByUser(this.myArticle);
+    this.articleService.addOneToNrOfArticlesByCategory(this.myArticle.categoryId);
+    this.successMessage = "Article ajouté à votre collection !";
+    this.show = true;
+    this.buttonShow = false;
+
+
 
  }
 

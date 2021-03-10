@@ -5,12 +5,13 @@ namespace App\Entity;
 use App\Entity\Article;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -51,7 +52,8 @@ class User implements UserInterface
     private $comments;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="users")
+     * @ORM\ManyToMany(targetEntity=Article::class)
+     * @JoinTable(name="article_user")
      */
     private $articles;
 
@@ -195,6 +197,7 @@ class User implements UserInterface
 
     /**
      * @return Collection|Article[]
+     * 
      */
     public function getArticles(): Collection
     {
@@ -204,20 +207,16 @@ class User implements UserInterface
     public function addArticle(Article $article): self
     {
         if (!$this->articles->contains($article)) {
-            $this->articles[] = $article;
-            $article->addUser($this);
+            $this->articles[] = $article;            
         }
-
         return $this;
     }
 
     public function removeArticle(Article $article): self
     {
         if ($this->articles->contains($article)) {
-            $this->articles->removeElement($article);
-            $article->removeUser($this);
+            $this->articles->removeElement($article);            
         }
-
         return $this;
     }
 

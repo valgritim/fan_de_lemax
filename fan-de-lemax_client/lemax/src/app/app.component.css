@@ -3,11 +3,13 @@
   width: 170vh;
 }
 #bg-red{
-  background-color: rgb(84, 0, 0);
+  background-color: rgb(128, 0, 0);
 }
 
 *{
   margin:0;
   padding:0;
 }
-
+p{
+  padding-bottom: 25px;
+}

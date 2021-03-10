@@ -11,7 +11,7 @@
   transform: scale(1.2);
 }
 .custom-img > a > img{
-  border: 3px solid lightgray;
+  border: 4px solid lightgray;
   border-radius: 50%;
   height: 12em;
   width: 12em;

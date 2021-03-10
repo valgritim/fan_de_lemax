@@ -101,7 +101,7 @@ class CrawlingService {
                 $data[] = [$name, $sku, $releaseSearch, $img, $category];  
 
                return $data;
-                       
+                   
             }); 
            
         }

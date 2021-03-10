@@ -1,29 +1,20 @@
 <section class="container-fluid" id="dashboardSection">
-  <div class="row">
-    <div class="col-md-2 page-header" id="header">
-      <h2 class="h3 text-center">Collection Lemax de {{ pseudoUser }}</h2>
-      <div class="dropdown-divider"></div>
-      <nav class="mt-4 mb-5">
-        <ul>
-          <li><fa-icon [icon]="faHome"></fa-icon>&nbsp;Mes maisons</li>
-          <li><fa-icon [icon]="faBuilding"></fa-icon>&nbsp;Mes façades</li>
-          <li><fa-icon [icon]="faSkating"></fa-icon>&nbsp;Mes personnages</li>
-          <li><fa-icon [icon]="faTree"></fa-icon>&nbsp;Mes Accessoires</li>
-          <li><fa-icon [icon]="faHeart"></fa-icon>&nbsp;Ma wishlist</li>
-          <li><fa-icon [icon]="faComments"></fa-icon>&nbsp;Commentaires laissés</li>
-        </ul>
-      </nav>
-    </div>
-    <div class="col-md-8 text-center  mt-3" id="body">
-      <h2>Mon tableau de bord</h2>
-      <div class="row justify-content-md-center">
-        <div class="col-md-2 tab-content"><h3 class="h5">Maisons : </h3><p>32</p></div>
-        <div class="col-md-2 tab-content"><h3 class="h5">Façades : </h3><p>5</p></div>
-        <div class="col-md-2 tab-content"><h3 class="h5">Personnages :</h3><p>34</p></div>
-        <div class="col-md-2 tab-content"><h3 class="h5">Accessoires :</h3><p>57</p></div>
+    <app-dashboard-header></app-dashboard-header>
+    <div class="col-md-10 mt-3" id="dashbody">
+      <h2 class="animate__animated animate__fadeInTopLeft text-center ">Mon tableau de bord</h2>
+      <div class="row justify-content-md-center text-center">
+        <div class="col-md-2 tab-content pt-2"><h3 class="h5">Maisons : </h3><p>{{resultArray['house']}}</p></div>
+        <div class="col-md-2 tab-content pt-2"><h3 class="h5">Façades : </h3><p>{{resultArray['facade']}}</p></div>
+        <div class="col-md-2 tab-content pt-2"><h3 class="h5">Personnages :</h3><p>{{resultArray['folk']}}</p></div>
+        <div class="col-md-2 tab-content pt-2"><h3 class="h5">Accessoires :</h3><p>{{resultArray['accessory']}}</p></div>
+        <div class="col-md-2 tab-content pt-2"><h3 class="h5">Animations :</h3><p>{{resultArray['animated']}}</p></div>
+        <div class="col-md-2 tab-content pt-2"><h3 class="h5">Articles retirés :</h3><p>{{resultArray['retired']}}</p></div>
       </div>
+      <div class="global col-md-12">
+          <router-outlet></router-outlet>
+      </div>
+
     </div>
-  </div>
 </section>
 
 

@@ -1,4 +1,4 @@
-<a routerLink="/category/{{myArticle.categoryId}}/{{myArticle.sku}}" class="list-group-item clearfix" (click)="onSelected()">
+<!-- <a routerLink="/category/{{myArticle.categoryId}}/{{myArticle.sku}}" class="list-group-item clearfix" (click)="onSelected()">
   <div class="pull-left">
     <img [src]="myArticle.imagePath" alt="{{ myArticle.name }}" class="img-responsive" style="max-height: 200px;">
     <hr>
@@ -6,15 +6,22 @@
     <h5 class="text-center">SKU# {{ myArticle.sku }}</h5>
     <p class="list-group-item-text text-center mb-0">Date de sortie : {{ myArticle.released}}</p>
     <p class="list-group-item-text text-center" *ngIf="myArticle.retired != null">Date de retrait : {{ myArticle.retired}}</p>
-    <button type="button" class="btn btn-danger m-2" *ngIf="logginState" (click)="onAddToMyCollection()">Ajouter à ma collection</button>
+    <button type="button" class="btn btn-danger m-2 addToCollection" *ngIf="logginState && !isInUserAccount" (click)="onAddToMyCollection()">Ajouter à ma collection</button>
   </div>
-</a>
+</a> -->
 
-<!-- <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
+<div class="card" style="width: 18rem;">
+  <span *ngIf="show" class="alert alert-success">{{successMessage}}</span>
+  <a routerLink="/category/{{myArticle.categoryId}}/{{myArticle.sku}}" (click)="onSelected()">
+    <img [src]="myArticle.imagePath" alt="{{ myArticle.name }}" class="img-responsive" style="max-height: 200px;">
+  </a>
+  <hr>
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h4 class="list-group-item-heading text-center">{{ myArticle.name }}</h4>
+    <h5 class="text-center">SKU# {{ myArticle.sku }}</h5>
+    <p class="list-group-item-text text-center mb-0">Date de sortie : {{ myArticle.released}}</p>
+    <p class="list-group-item-text text-center" *ngIf="myArticle.retired != null">Date de retrait : {{ myArticle.retired}}</p>
+    <button type="button" class="btn btn-danger m-2 addToCollection" *ngIf="logginState && !isInUserAccount && buttonShow && !isPresent" (click)="onAddToMyCollection($event)">Ajouter à ma collection</button>
+    <p *ngIf="logginState && isPresent && !isInUserAccount" class="mt-1"><strong>Vous avez déjà cet article</strong></p>
   </div>
-</div> -->
+</div>

@@ -118,5 +118,6 @@ class ArticleController extends AbstractController
 
         return new JsonResponse($json, 200, [], true);
     }
+
 }
 

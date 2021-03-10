@@ -1,6 +1,25 @@
+.navbar{
+  box-shadow: -1px 7px 5px -4px rgba(0,0,0,0.75);
+-webkit-box-shadow: -1px 7px 5px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: -1px 7px 5px -4px rgba(0,0,0,0.75);
+z-index: 1;
+
+}
+.dropdown-item{
+  font-weight: 500;
+}
+.dropdown-item:hover{
+  background-color: #f0dadb;
+}
 .dropdown-item > img {
   height: 2em;
-  height: 2em;
+  width: 2em;
+}
+a.nav-link{
+  font-weight: 600;
+}
+a.nav-link:hover{
+  color: #ffc107 !important;
 }
 
 #logo_fan{
@@ -17,6 +36,7 @@ a{
 
 a:hover{
   text-decoration: none;
+
 }
 
 #results{
@@ -37,9 +57,7 @@ a:hover{
   width: 40em;
   margin:auto;
 }
-
-
-
-
-
+.bg-dark{
+  background: linear-gradient(to bottom, #770a0a 0%,#5a0808 44%,#460707 100%) !important;
+}
 

@@ -71,7 +71,7 @@ class AuthController extends AbstractController
             "user" => $userInDb->getUsername(),
             "exp" => $expiration
         ];
-
+        
         $jwt = JWT::encode($payload, $this->getParameter('jwt_secret'), 'HS256');
         $userInDb = $userInDb-> setToken($jwt);      
         $serializedUser = $serializer->serialize($userInDb, 'json', ['groups' => 'user:register']);

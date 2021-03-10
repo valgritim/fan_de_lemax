@@ -15,19 +15,32 @@ li{
 
 #img-container{
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 #myimage
 {
-  width: 500px;
-  height: 500px;
+  width: 45em;
+  height: 45em;
 }
 
+p{
+  margin: 0px 0px 8px 0px;
+}
 .img-magnifier-glass {
   position: absolute;
-  border: 3px solid rgb(255, 255, 255);
+  border: 3px solid rgb(165, 42, 42);
+  border-radius: 50%;
   cursor: none;
   /*Set the size of the magnifier glass:*/
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
+}
+.go-back, .go-back:hover{
+  color: rgb(165, 42, 42);
+}
+
+.go-back:hover{
+  font-weight: 600;
 }

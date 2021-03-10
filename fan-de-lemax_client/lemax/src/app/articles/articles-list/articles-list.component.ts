@@ -1,10 +1,7 @@
-import { Route } from '@angular/compiler/src/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RequestsService } from 'src/app/requests.service';
-import { ArticleService } from 'src/app/shared/article.service';
-import { CategoryService } from 'src/app/shared/category.service';
 import { Article } from '../../shared/article.model';
 
 @Component({
@@ -21,16 +18,16 @@ export class ArticlesListComponent implements OnInit {
   page: number = 1;
   totalRecords: number;
 
-  constructor(private route: ActivatedRoute, private articleService : ArticleService, private requestsService : RequestsService, private spinnerService: NgxSpinnerService) {}
+  constructor(private route: ActivatedRoute, private requestsService : RequestsService, private spinnerService: NgxSpinnerService) {}
 
   ngOnInit(): void {
     // this.getCategoryById(1);
-      this.spinnerService.show();
+    // this.spinnerService.show();
       this.route.params.subscribe(
         (params: Params) => {
           this.id = +params['id'];
-
-          // this.articles = this.articleService.getArticlesByCategory(this.id);
+          this.spinnerService.show();
+          // Go feetch articles by category API endpoint
           this.requestsService.fetchArticlesByCategory(this.id)
           .subscribe(categories => {
             this.articlesOfOneCategory = categories;

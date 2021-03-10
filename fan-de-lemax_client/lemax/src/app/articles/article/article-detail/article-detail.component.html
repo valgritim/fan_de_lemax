@@ -1,20 +1,21 @@
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade-rotating" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
 <div class="container">
   <div class="col-md-12">
-    <a href="" (click)="goBack()"><fa-icon [icon]="faArrowLeft"></fa-icon> Retourner à la liste</a>
+    <a class="go-back" href="" (click)="goBack()"><fa-icon [icon]="faArrowLeft"></fa-icon> Retourner à la liste</a>
     <h1 class="mt-4 mb-2">{{ selectedArticle.name }}</h1>
+
     <div class="row flex mb-5">
 
-      <div class="col-md-7" id="img-container">
+      <div class="col-md-6" id="img-container">
         <img src="{{selectedArticle.imagePath}}" alt="{{ selectedArticle.name}}" id="myimage">
       </div>
 
       <div class="offset-1 col-md-4 pt-5">
         <h2>Détails de l'article</h2>
-        <h3>SKU#: {{ selectedArticle.sku }}</h3>
-        <p>Date de sortie: {{ selectedArticle.released}}</p>
-        <p *ngIf="selectedArticle.retired == null">Cet Article est toujours en vente</p>
-        <p *ngIf="selectedArticle.retired != null">Article retiré en {{ selectedArticle.retired }}</p>
+        <h3 class="h4 mb-5">SKU#: {{ selectedArticle.sku }}</h3>
+        <p>- Date de sortie: {{ selectedArticle.released}}</p>
+        <p *ngIf="selectedArticle.retired == null"><fa-icon [icon]="faStar"></fa-icon> Cet Article est toujours en vente.</p>
+        <p *ngIf="selectedArticle.retired != null">- Article retiré en {{ selectedArticle.retired }}.</p>
       </div>
     </div>
     <div id="shops">

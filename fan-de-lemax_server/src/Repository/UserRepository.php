@@ -19,23 +19,23 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
     {
         parent::__construct($registry, User::class);
     }
+       
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
+/**
+ * Get User by Id
+ *
+ * @param [type] $value
+ * @return void
+ */
+    public function findOneById($value): ?User
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
+            ->andWhere('u.id = :val')
             ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getOneOrNullResult();
     }
-    */
+ 
   
     public function loadUserByUsername(string $username): ?User
     {
@@ -47,6 +47,5 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
         ;
     }
 
-
-   
+       
 }

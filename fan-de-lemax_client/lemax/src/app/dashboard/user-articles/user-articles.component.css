@@ -1,0 +1,27 @@
+.addToCollection{
+    display: none;
+}
+.list-group-item.clearfix{
+  width: 22em;
+  height: 27em;
+  margin-bottom: 20px;
+  transition: all .2s ease-in-out;
+  box-shadow: -2px 5px 5px 0px rgba(82,74,74,0.45);
+  -webkit-box-shadow: -2px 5px 5px 0px rgba(82,74,74,0.45);
+  -moz-box-shadow: -2px 5px 5px 0px rgba(82,74,74,0.45);
+}
+.img-responsive{
+  max-width: 20em;
+  min-height: 12.5em;
+}
+#displayAll {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-evenly;
+}
+
+.no-article{
+  font-size: large;
+  color: rgb(160, 40, 40);
+}
+

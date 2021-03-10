@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -63,16 +64,18 @@ class Article
      */
     private $comment;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="articles")
-     */
-    private $users;
-
-
+    
     public function __construct()
     {
         $this->comment = new ArrayCollection();
-        $this->users = new ArrayCollection();
+  
+    }
+
+    public function setId(int $id): self
+    {
+        $this->name = $id;
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -181,32 +184,6 @@ class Article
         }
 
         return $this;
-    }
-
-    /**
-     * @return Collection|user[]
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(user $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-        }
-
-        return $this;
-    }
-
-    public function removeUser(user $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-        }
-
-        return $this;
-    }
+    }   
 
 }

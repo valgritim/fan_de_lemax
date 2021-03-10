@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,9 +15,12 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ArticleRepository extends ServiceEntityRepository
 {
+   
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Article::class);
+
     }
 
      /**
@@ -70,7 +74,12 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
+    public function findArticlesByUserIdAndCategoryId($userId, $categoryId){
+         $dql = "SELECT a from Article JOIN a.users u WHERE u.id = $userId AND a.categoryId = $categoryId";
+        return $this->createQueryBuilder($dql)
+                    ->getQuery()
+                    ->getResult();
+    }
     
     
 }

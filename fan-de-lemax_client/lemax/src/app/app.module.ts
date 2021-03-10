@@ -27,6 +27,10 @@ import { ArticleSearchComponent } from './articles/article/article-search/articl
 import { AuthComponent} from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LittleSpinnerComponent } from './shared/little-spinner/little-spinner.component';
+import { DashboardHeaderComponent } from './shared/dashboard-header/dashboard-header.component';
+import { UserArticlesComponent } from './dashboard/user-articles/user-articles.component';
+import { FirstToUpperPipe } from './shared/custom-pipes/first-to-upper.pipe';
+
 
 
 
@@ -47,6 +51,9 @@ import { LittleSpinnerComponent } from './shared/little-spinner/little-spinner.c
     AuthComponent,
     DashboardComponent,
     LittleSpinnerComponent,
+    DashboardHeaderComponent,
+    UserArticlesComponent,
+    FirstToUpperPipe,
 
 
   ],
@@ -60,7 +67,7 @@ import { LittleSpinnerComponent } from './shared/little-spinner/little-spinner.c
     NgxSpinnerModule,
     NgxPaginationModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
 
   ],
   providers: [ArticleService, RequestsService, AuthService],

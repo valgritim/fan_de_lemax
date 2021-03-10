@@ -1,5 +1,6 @@
 export class Article {
 
+  public id: string;
   public name :string;
   public sku : number;
   public released: string;
@@ -7,7 +8,8 @@ export class Article {
   public imagePath : string;
   public categoryId : number;
 
-  constructor(name: string, sku: number, released: string, retired: string, imagePath: string, category: number){
+  constructor(id: string, name: string, sku: number, released: string, retired: string, imagePath: string, category: number){
+    this.id = id;
     this.name = name;
     this.sku = sku;
     this.released = released;

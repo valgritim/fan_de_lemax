@@ -4,7 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { RequestsService } from 'src/app/requests.service';
 import { Article } from 'src/app/shared/article.model';
 import { ArticleService } from 'src/app/shared/article.service';
-import { faArrowLeft, faOtter } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faOtter, faStar } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -16,6 +16,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ArticleDetailComponent implements OnInit {
   faArrowLeft = faArrowLeft;
+  faStar = faStar;
   selectedArticle: Article;
   sku: number;
   results: any[] = [];
@@ -55,7 +56,7 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   magnify(imgID: string, zoom: number) {
-    console.log("j'y suis");
+
     var img, glass, w, h, bw;
     img = document.getElementById("myimage");
     console.log(img);

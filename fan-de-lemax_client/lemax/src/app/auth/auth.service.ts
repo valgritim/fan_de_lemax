@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { AuthResponseData } from './../shared/authResponseData.model';
 import { Router } from '@angular/router';
+import { ArticleService } from '../shared/article.service';
 
 
 @Injectable({
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
+  private userId: string;
   private registerUrl= 'https://localhost:8000/api/register';
   private loginUrl = 'https://localhost:8000/api/login';
 
@@ -25,7 +27,7 @@ export class AuthService {
   private logginState: BehaviorSubject<boolean>;
 
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private articleService: ArticleService) {
     this.logginState = new BehaviorSubject<boolean>(false);
   }
 
@@ -62,12 +64,17 @@ export class AuthService {
 
   //After login, informations saved in localstorage
   setUser(response: AuthResponseData){
+
+    this.userId = response.id.toString();
+    localStorage.setItem('id', this.userId);
+
     localStorage.setItem('username', response.email);
     localStorage.setItem('pseudo', response.pseudo);
     localStorage.setItem('roles', response.roles['roles']);
     localStorage.setItem('token', response.token);
+
     this.setLogginStateValue(true);
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard/1']);
   }
 
   setLogginStateValue(value){
@@ -85,6 +92,8 @@ export class AuthService {
   //Clear the local storage for redirection to login
   logout() {
     localStorage.clear();
+    this.articleService.removeArticlesByUser();
+    this.articleService.resetArrayOfCategories();
     this.setLogginStateValue(false);
     this.router.navigate(['/auth']);
   }

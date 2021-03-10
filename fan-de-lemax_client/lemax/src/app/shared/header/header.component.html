@@ -34,7 +34,7 @@
           Mon compte Collectionneur
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-          <a class="dropdown-item" routerLink="/dashboard">Mon tableau de bord</a>
+          <a class="dropdown-item" routerLink="/dashboard/1">Mon tableau de bord</a>
           <a type="button" class="dropdown-item" (click)="logout()">Se déconnecter</a>
         </div>
 
@@ -59,6 +59,8 @@
               </div>
             </form>
             <div id="results">
+              <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade-rotating" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+
               <app-article
                   *ngFor="let result of filteredResults | async | paginate: {
                   itemsPerPage: 27,

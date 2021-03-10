@@ -11,10 +11,17 @@ a:not([href]):not([class]):hover {
   text-decoration: none;
   cursor: pointer;
 }
+a:hover{
+  font-weight: 600;
+}
+
 input.ng-invalid.ng-touched{
   border: 2px solid  rgb(160, 40, 40);
 }
+
 span{
   color: rgb(165, 42, 42);
   font-weight: bold;
 }
+
+
