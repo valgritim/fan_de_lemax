@@ -110,6 +110,22 @@ export class ArticleService {
   }
 
   /**
+   * Removes the selected article from articleUser array
+   */
+  removeOneArticleByUser(articleSku: number){
+    if(articleSku != null){
+      var index = this.articlesByUser.findIndex(function(element){
+        return element.sku === articleSku;
+      });
+      if(index !== -1){
+        this.articlesByUser.splice(index,1);
+      }  else {
+        throw new Error("impossible de supprimer l'article");
+      }
+  }
+}
+
+  /**
    * Count the articles by category to dispatch the result inside user-article.component
    * @returns array
    */
@@ -167,6 +183,26 @@ export class ArticleService {
 
   }
 
+  removeOneToNrOfArticlesByCategory(categoryId : number){
+    // console.log("1-categoryid ajouté " + categoryId);
+    switch(categoryId){
+      case 1 : this.nrOfArticlesByCategoryArray["house"] = this.nrOfArticlesByCategoryArray["house"] - 1;
+      break;
+      case 2 : this.nrOfArticlesByCategoryArray["facade"] = this.nrOfArticlesByCategoryArray["facade"] - 1;
+      break;
+      case 3 : this.nrOfArticlesByCategoryArray["folk"] = this.nrOfArticlesByCategoryArray["facade"] - 1;
+      break;
+      case 4 : this.nrOfArticlesByCategoryArray["accessory"] = this.nrOfArticlesByCategoryArray["accessory"] - 1;
+      break;
+      case 5 : this.nrOfArticlesByCategoryArray["animated"] = this.nrOfArticlesByCategoryArray["animated"] - 1;
+      break;
+      default : this.nrOfArticlesByCategoryArray["retired"] = this.nrOfArticlesByCategoryArray["retired"] - 1;
+    }
+
+    // console.log(this.nrOfArticlesByCategoryArray);
+
+  }
+
   /**
    * Reset array nr of articles by category when user logs out
    */
@@ -192,4 +228,6 @@ export class ArticleService {
       }
       return of(this.isPresent);
   }
+
+
 }

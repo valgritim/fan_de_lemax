@@ -6,7 +6,7 @@ a:hover{
   text-decoration: none;
 }
 .card{
-  width: 22em;
+  width: 18em;
   height: 28em;
   padding-top:1em;
   margin-bottom: 30px;
@@ -31,11 +31,17 @@ hr{
 }
 .btn{
   position:absolute;
-  bottom: 3%;
+  bottom: 4%;
   left: 15%;
 
 }
 .btn:hover{
   background-color: steelblue;
   border-color: steelblue;
+}
+button.btn.btn-danger.deleteArticle{
+  position:absolute;
+  bottom:5%;
+  left:25%;
+
 }

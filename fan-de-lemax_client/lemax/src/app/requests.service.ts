@@ -20,7 +20,6 @@ export class RequestsService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-
     })
   };
 
@@ -84,6 +83,18 @@ export class RequestsService {
     .pipe(
       catchError(errorResp => {
         let errorMessage = `probleme dans envoyer un article ${errorResp}`;
+        console.log(errorMessage);
+        return throwError(errorMessage);
+      })
+    );
+  }
+
+  removeArticleByUser(userId: number, articleId: number){
+
+    return this.http.delete(this.userUrl + userId + "/" + articleId, this.httpOptions)
+    .pipe(
+      catchError(errorResp => {
+        let errorMessage = `probleme dans supprimer un article ${errorResp}`;
         console.log(errorMessage);
         return throwError(errorMessage);
       })

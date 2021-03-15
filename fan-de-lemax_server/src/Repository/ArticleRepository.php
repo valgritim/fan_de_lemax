@@ -60,7 +60,8 @@ class ArticleRepository extends ServiceEntityRepository
     public function findRetiredArticles()
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.retired IS NOT NULL' )
+            ->andWhere('a.retired IS NOT NULL')
+            ->orderBy('a.retired', 'DESC')
             ->getQuery()
             ->getResult();
     }
@@ -69,7 +70,8 @@ class ArticleRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->andWhere('a.categoryId = :id')
             ->andWhere('a.retired is null')
-            ->setParameter('id', $id)            
+            ->setParameter('id', $id)  
+            ->orderBy('a.released','DESC')         
             ->getQuery()
             ->getResult();
     }

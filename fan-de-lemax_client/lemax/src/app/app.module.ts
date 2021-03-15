@@ -14,6 +14,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { ArticleService } from './shared/article.service';
+import { MagnifierService } from './shared/magnifier.service';
 import { ArticleDetailComponent } from './articles/article/article-detail/article-detail.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -70,7 +71,7 @@ import { FirstToUpperPipe } from './shared/custom-pipes/first-to-upper.pipe';
     ReactiveFormsModule,
 
   ],
-  providers: [ArticleService, RequestsService, AuthService],
+  providers: [ArticleService, RequestsService, AuthService, MagnifierService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

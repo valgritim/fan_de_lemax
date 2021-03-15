@@ -76,7 +76,7 @@ class UserController extends AbstractController
         // dd($userInDb);
         if(!$userInDb){
             return new JsonResponse(['message' => 'Unknown user'], Response::HTTP_NOT_FOUND, [], true);
-        }
+        };
         $data = $request->getContent();
         
         $json = json_decode($data);        
@@ -88,5 +88,36 @@ class UserController extends AbstractController
 
 
         return new JsonResponse('Article inserted in User Portfolio', 200, []);
+    }
+
+    /**
+     * @Route("/api/user/{userId}/{articleId}", name = "api_remove_article", methods={"DELETE"})
+     *
+     * @param [type] $userId
+     * @param [type] $articleId
+     * @param ArticleRepository $articleRepository
+     * @param UserRepository $userRepository
+     * @return void
+     */
+    public function removeArticleByUser($userId, $articleId, EntityManagerInterface $em, ArticleRepository $articleRepository, UserRepository $userRepository){
+
+        $userInDb = $userRepository->findOneById($userId);
+        // dd($userInDb);
+        if(!$userInDb){
+            return new JsonResponse(['message' => 'Unknown user'], Response::HTTP_NOT_FOUND, [], true);
+        };
+        
+        $article = $articleRepository->findOneById($articleId);
+
+        if(!$article){
+            return new JsonResponse(['message' => 'Unknown article'], Response::HTTP_NOT_FOUND, [], true);
+        };        
+
+        $userInDb->removeArticle($article);
+        $em->persist($userInDb);
+        $em->flush();
+
+        return new JsonResponse('Article removed from User Portfolio', 200, []);
+    
     }
 }

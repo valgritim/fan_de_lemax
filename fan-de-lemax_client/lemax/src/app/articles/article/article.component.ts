@@ -11,6 +11,7 @@ import { ArticleService } from 'src/app/shared/article.service';
 })
 export class ArticleComponent implements OnInit {
   @Input() myArticle : Article;
+  @Input() currentpage: number;
   logginState: boolean;
   @Input() isInUserAccount: boolean;
   articleId : number;
@@ -28,6 +29,7 @@ export class ArticleComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getLogginStateValue().subscribe(value => {
       this.logginState = value;
+      console.log(this.currentpage);
     });
 
     if(localStorage.getItem("id")){
@@ -63,10 +65,22 @@ export class ArticleComponent implements OnInit {
     this.successMessage = "Article ajouté à votre collection !";
     this.show = true;
     this.buttonShow = false;
-
-
-
  }
 
+ onDeleteArticle(){
 
+  this.articleId = parseInt(this.myArticle.id);
+  this.userId = parseInt(localStorage.getItem('id'));
+
+  this.requestsService.removeArticleByUser(this.userId, this.articleId)
+    .subscribe(result => {
+      this.message = result
+    }, errorMessage => {
+      this.error = errorMessage;
+    });
+
+    this.articleService.removeOneArticleByUser(this.myArticle.sku);
+    this.articleService.removeOneToNrOfArticlesByCategory(this.myArticle.categoryId);
+    document.getElementById(this.myArticle.id).style.display = "none";
+ }
 }

@@ -15,9 +15,10 @@
         currentPage : page,
         totalItems : totalRecords }"
       [myArticle] = "articleEl"
+      [currentpage] = page
     >
     </app-article>
-    <pagination-controls maxSize = "9" directionLinks="true" previousLabel="Previous" nextLabel="Next"  (pageChange)="page = $event"></pagination-controls>
+    <pagination-controls maxSize = "9" directionLinks="true" previousLabel="Previous" nextLabel="Next"  (pageChange)="page = $event" (click)="onPageChange()"></pagination-controls>
     <app-scroll-to-top></app-scroll-to-top>
   </div>
 </div>
