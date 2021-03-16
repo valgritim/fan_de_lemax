@@ -17,14 +17,6 @@ export class AppComponent {
       localStorage.clear();
   }
 
-  @HostListener("window: onload", ["$event"])
-  keepLocalSorage(event){
-    localStorage.setItem("id", this.authService.getUser().key(0));
-    localStorage.setItem("username", this.authService.getUser().key(1));
-    localStorage.setItem("pseudo", this.authService.getUser().key(2));
-    localStorage.setItem("token", this.authService.getUser().key(3));
-  }
-
   showNavigationArrows = false;
 
   constructor(config: NgbCarouselConfig, private articleService: ArticleService, private router: Router, private authService: AuthService){
@@ -32,6 +24,6 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    this.authService.getUser();
+
   }
 }
