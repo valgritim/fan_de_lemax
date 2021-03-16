@@ -19,7 +19,7 @@ export class AuthComponent implements OnInit {
   faBackspace = faBackspace;
   signInForm : FormGroup;
   registerForm: FormGroup;
-  error: string = null;
+  error: boolean = false;
   errorLogin: string = null;
 
 
@@ -67,11 +67,14 @@ export class AuthComponent implements OnInit {
         this.isLoading = false;
         this.signInForm.reset();
         this.authService.setUser(responseData);
+      } else {
+        this.errorLogin = responseData['message'];
       }
 
     }, errorMessage => {
       this.errorLogin = errorMessage;
       this.isLoading = false;
+
     });
 
   }

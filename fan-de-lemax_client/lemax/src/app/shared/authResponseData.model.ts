@@ -2,11 +2,11 @@ export class AuthResponseData {
 
   public id: number;
   public email: string;
-  public roles : []
+  public roles : string
   public pseudo: string;
   public token: string;
 
-  constructor(id: number, email: string, roles: [], pseudo: string, token: string){
+  constructor(id: number, email: string, roles: string, pseudo: string, token: string){
       this.id = id;
       this.email = email;
       this.roles = roles;

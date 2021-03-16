@@ -41,6 +41,8 @@ export class HeaderComponent implements OnInit {
 
     this.authService.getLogginStateValue().subscribe(value => {
       this.logginState = value;
+      console.log("loginstate dans header" + this.logginState);
+      console.log(localStorage);
     })
   }
   onSubmit(content){

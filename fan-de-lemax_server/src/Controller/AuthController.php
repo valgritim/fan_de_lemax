@@ -59,9 +59,8 @@ class AuthController extends AbstractController
         $isValid = $encoder->isPasswordValid($userInDb, $user->getPassword());
         
         if(!$isValid){
-            return $this->json([
-                'message' => 'email or password is wrong!',
-            ]);
+            return new JsonResponse([
+                'message' => 'Identifiants incorrects!'], Response::HTTP_NOT_FOUND, [], true);
          
         }
         $expiration = time() + 3600;
@@ -76,7 +75,7 @@ class AuthController extends AbstractController
         $userInDb = $userInDb-> setToken($jwt);      
         $serializedUser = $serializer->serialize($userInDb, 'json', ['groups' => 'user:register']);
         
-        return new JsonResponse($serializedUser, 200,['Authorization' => 'Bearer '.$jwt], true);
+        return new JsonResponse($serializedUser,Response::HTTP_OK,['Authorization' => 'Bearer '.$jwt], true);
         
     }
 
@@ -102,7 +101,7 @@ class AuthController extends AbstractController
             $isUserInDb = $userRepository->findOneBy(array('email' => $user->getEmail()));
 
             if($isUserInDb){
-                return new Response('User already exists', 400, []);
+                return new JsonResponse('User already exists', 400, []);
             }
 
             $em->persist($user);

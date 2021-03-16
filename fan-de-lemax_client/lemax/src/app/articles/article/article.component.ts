@@ -29,7 +29,7 @@ export class ArticleComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getLogginStateValue().subscribe(value => {
       this.logginState = value;
-      console.log(this.currentpage);
+      // console.log(this.currentpage);
     });
 
     if(localStorage.getItem("id")){
@@ -37,7 +37,7 @@ export class ArticleComponent implements OnInit {
       this.articleService.checkIfArticleIsOwned(this.myArticle.id)
           .subscribe(value => {
             this.isPresent = value;
-            console.log("dans article init check" + this.isPresent);
+            // console.log("dans article init check" + this.isPresent);
           })
     }
   }

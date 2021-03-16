@@ -18,7 +18,7 @@ import { MagnifierService } from './shared/magnifier.service';
 import { ArticleDetailComponent } from './articles/article/article-detail/article-detail.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { RetiredComponent } from './retired/retired.component';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -31,6 +31,7 @@ import { LittleSpinnerComponent } from './shared/little-spinner/little-spinner.c
 import { DashboardHeaderComponent } from './shared/dashboard-header/dashboard-header.component';
 import { UserArticlesComponent } from './dashboard/user-articles/user-articles.component';
 import { FirstToUpperPipe } from './shared/custom-pipes/first-to-upper.pipe';
+import { AuthInterceptor } from './shared/auth.interceptor';
 
 
 
@@ -71,7 +72,7 @@ import { FirstToUpperPipe } from './shared/custom-pipes/first-to-upper.pipe';
     ReactiveFormsModule,
 
   ],
-  providers: [ArticleService, RequestsService, AuthService, MagnifierService],
+  providers: [ArticleService, RequestsService, AuthService, MagnifierService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

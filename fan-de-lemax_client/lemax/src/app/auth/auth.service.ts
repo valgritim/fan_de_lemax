@@ -70,7 +70,7 @@ export class AuthService {
 
     localStorage.setItem('username', response.email);
     localStorage.setItem('pseudo', response.pseudo);
-    localStorage.setItem('roles', response.roles['roles']);
+    localStorage.setItem('roles', response.roles.toString());
     localStorage.setItem('token', response.token);
 
     this.setLogginStateValue(true);

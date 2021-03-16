@@ -219,7 +219,7 @@ export class ArticleService {
 
       for(let i = 0 ; i < totalArticles.length; i++){
         if(totalArticles[i].id == id){
-          console.log("id de l'article " + this.articlesByUser[i].id + " " + id);
+          // console.log("id de l'article " + this.articlesByUser[i].id + " " + id);
           this.isPresent = true;
           break;
         } else {

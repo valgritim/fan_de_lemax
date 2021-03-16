@@ -10,7 +10,7 @@
   </div>
 </a> -->
 
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 18rem;" id="{{myArticle.id}}">
   <span *ngIf="show" class="alert alert-success">{{successMessage}}</span>
   <a routerLink="/category/{{myArticle.categoryId}}/{{myArticle.sku}}" (click)="onSelected()">
     <img [src]="myArticle.imagePath" alt="{{ myArticle.name }}" class="img-responsive" style="max-height: 200px;">
@@ -23,5 +23,6 @@
     <p class="list-group-item-text text-center" *ngIf="myArticle.retired != null">Date de retrait : {{ myArticle.retired}}</p>
     <button type="button" class="btn btn-danger m-2 addToCollection" *ngIf="logginState && !isInUserAccount && buttonShow && !isPresent" (click)="onAddToMyCollection($event)">Ajouter à ma collection</button>
     <p *ngIf="logginState && isPresent && !isInUserAccount" class="mt-1"><strong>Vous avez déjà cet article</strong></p>
+    <button class="btn btn-danger deleteArticle" (click)="onDeleteArticle()" *ngIf="logginState && isInUserAccount">Supprimer l'Article</button>
   </div>
 </div>
